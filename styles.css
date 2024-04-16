@@ -4,11 +4,14 @@
     padding:0;
 }
 
-body{
+.login{
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    min-height: 97vh;
+    background: linear-gradient(rgb(0, 242, 255), rgb(5, 0, 140));
+    
+    
 }
 
 .card{
@@ -16,14 +19,18 @@ body{
     border-radius: 20px;
     padding:27px 30px;
     border: solid 2px whitesmoke;
-    background-color: white;
+    
+    z-index: 10;
+
+    background: rgba(255, 255, 255, 0.5);
+
 }
 
 .card h1{
     text-align: center;
 }
 
-.card .input{
+.input{
     width: 100%;
     height: 50px;
     background: transparent;
@@ -34,7 +41,7 @@ body{
 
 }
 
-.card .input input{
+.input input{
     width: 100%;
     height: 50px;
     background: transparent;
@@ -55,7 +62,7 @@ button {
     
 }
 button:hover{
-    font-size: 23px;
+    font-size: 18px;
 
 }
 
@@ -64,5 +71,154 @@ button:active{
     background-color:grey;
 
 }
+
+.info{
+    background: black;
+    padding: 50vh 50px;
+}
+
+.downArrow{
+    text-align: center;
+    color:rgb(0, 0, 0);
+    height: 25px;
+
+}
+
+/* .arrow{
+    font-size: 40px;
+    animation-name: bounce;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+
+
+} */
+
+.arrow{
+    animation: moveUpDown 2s linear infinite;
+    color: rgb(116, 116, 116);
+    position: absolute;
+    top:96%;
+    z-index: 10;
+
+}
+
+@keyframes moveUpDown {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    15% {
+        transform: translateY(-15px);
+    }
+    20%{
+        transform: translateY(0);
+    }
+    25%{
+        transform: translateY(-7px);
+    }
+    27%{
+        transform: translateY(0px);
+    }
+
+}
+
+.info{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+    background: rgba(5,8,104,255)
+}
+
+.infoCard{
+    width: 50vw;
+    height:fit-content;
+    border-radius: 70px;
+    padding:27px 30px;
+    border: solid 2px whitesmoke;
+    background-color: white;
+    color: darkgrey;
+}
+
+
+.custom-shape-divider-top-1713266314 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+.wave1{
+    /* Other styles */
+    transition: transform 0.5s; /* Adjust duration as needed */
+}
+.wave2{
+    /* Other styles */
+    transition: transform 0.8s; /* Adjust duration as needed */
+}
+
+.wave3{
+    transition: transform 0.7s;
+}
+.wave4{
+    transition: transform 1s;
+}
+.wave5{
+    transition: transform 1.2s;
+}
+.wave6{
+    transition: transform 1.5s;
+}
+
+
+.wave1{
+    position:absolute;
+    z-index: 0;
+    top:0px;
+    width: 200vw;
+    max-height: 100vh;
+    
+    /* background: rgb(8,244,252); */
+}
+.wave2{
+    position:absolute;
+    z-index: 1;
+    top:50px;
+    width: 230vw;
+    max-height: 100vh;
+    transform: translateX(-20px);
+    float: right;
+}
+.wave3{
+    position:absolute;
+    z-index: 2;
+    top:100px;
+    width: 250vw;
+    max-height: 100vh;
+}
+.wave4{
+    position:absolute;
+    z-index: 3;
+    top:120px;
+    width: 350vw;
+    max-height: 100vh;
+}
+.wave5{
+    position:absolute;
+    z-index: 4;
+    top:130px;
+    width: 400vw;
+    max-height: 100vh;
+}
+.wave6{
+    position:absolute;
+    z-index: 5;
+    top:140px;
+    width: 450vw;
+    max-height: 100vh;
+}
+
+
 
 
