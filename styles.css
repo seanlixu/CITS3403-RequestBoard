@@ -9,7 +9,7 @@
     justify-content: center;
     align-items: center;
     min-height: 97vh;
-    background: linear-gradient(rgb(0, 242, 255), rgb(5, 0, 140));
+    background:rgb(0, 242, 255);
     
     
 }
@@ -19,10 +19,13 @@
     border-radius: 20px;
     padding:27px 30px;
     border: solid 2px whitesmoke;
+    padding-bottom: 40px;
     
     z-index: 10;
 
     background: rgba(255, 255, 255, 0.5);
+    position: fixed;
+
 
 }
 
@@ -38,6 +41,7 @@
     border: solid 2px whitesmoke;
     margin-top: 5px;
     margin-bottom: 5px;
+
 
 }
 
@@ -75,13 +79,14 @@ button:active{
 .info{
     background: black;
     padding: 50vh 50px;
+    z-index: 6;
 }
 
 .downArrow{
     text-align: center;
     color:rgb(0, 0, 0);
     height: 25px;
-
+    z-index: 6;
 }
 
 /* .arrow{
@@ -98,7 +103,7 @@ button:active{
     color: rgb(116, 116, 116);
     position: absolute;
     top:96%;
-    z-index: 10;
+    z-index: 6;
 
 }
 
@@ -127,7 +132,8 @@ button:active{
     align-items: center;
     color: white;
     text-align: center;
-    background: rgba(5,8,104,255)
+    background: rgba(5,8,104,255);
+    z-index: 7;
 }
 
 .infoCard{
@@ -155,18 +161,13 @@ button:active{
 }
 .wave2{
     /* Other styles */
-    transition: transform 0.8s; /* Adjust duration as needed */
+    transition: transform 0.5s; /* Adjust duration as needed */
 }
 
-.wave3{
-    transition: transform 0.7s;
-}
 .wave4{
     transition: transform 1s;
 }
-.wave5{
-    transition: transform 1.2s;
-}
+
 .wave6{
     transition: transform 1.5s;
 }
@@ -184,39 +185,39 @@ button:active{
 .wave2{
     position:absolute;
     z-index: 1;
-    top:50px;
-    width: 230vw;
+    top: 40px;
+    width: 200vw;
     max-height: 100vh;
-    transform: translateX(-20px);
-    float: right;
 }
 .wave3{
     position:absolute;
     z-index: 2;
     top:100px;
-    width: 250vw;
+    width: 200vw;
     max-height: 100vh;
 }
 .wave4{
     position:absolute;
-    z-index: 3;
-    top:120px;
-    width: 350vw;
+    z-index: 5;
+    top:95px;
+    width: 200vw;
     max-height: 100vh;
 }
 .wave5{
     position:absolute;
-    z-index: 4;
+    z-index: 5;
     top:130px;
-    width: 400vw;
+    width: 200vw;
     max-height: 100vh;
 }
 .wave6{
     position:absolute;
-    z-index: 5;
-    top:140px;
-    width: 450vw;
+    z-index: 6;
+    top:100px;
+    width: 300vw;
     max-height: 100vh;
+    transform: translate(-50%, -50%);
+
 }
 
 
