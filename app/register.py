@@ -43,7 +43,6 @@ def register_user():
         response = {'status': 'error', 'message': 'User or password not found'}
         return jsonify(response), 400
 
-    
     # Add some password checks, like Must be capital. etc all that.
     if len(user) > 20 or len(password) < 8 or len(password) > 30:
         status = 'User must be less than 20 characters, Password must be between 8 and 30 characters'
