@@ -172,19 +172,21 @@ button:active{
     justify-content: center;
     align-items: center;
     color: white;
-    text-align: center;
+    text-align: left;
     background: rgba(5,8,104,255);
+
     z-index: 7;
 }
 
 .infoCard{
-    width: 50vw;
-    height:fit-content;
+    width: 60vw;
+    height: fit-content;
     border-radius: 70px;
     padding:27px 30px;
     border: solid 2px whitesmoke;
     background-color: white;
-    color: darkgrey;
+    color: rgba(5,8,104,255);
+    z-index: 11;
 }
 
 
@@ -197,20 +199,20 @@ button:active{
     line-height: 0;
 }
 .wave1{
-    /* Other styles */
+
     transition: transform 0.5s; /* Adjust duration as needed */
 }
 .wave2{
-    /* Other styles */
-    transition: transform 0.5s; /* Adjust duration as needed */
+
+    transition: transform 0s; /* Adjust duration as needed */
 }
 
 .wave4{
-    transition: transform 1s;
+    transition: transform 0s;
 }
 
 .wave6{
-    transition: transform 1.5s;
+    transition: transform 0s;
 }
 
 
@@ -229,6 +231,7 @@ button:active{
     top: 40px;
     width: 200vw;
     max-height: 100vh;
+    overflow-x:hidden;
 }
 .wave3{
     position:absolute;
@@ -243,6 +246,7 @@ button:active{
     top:95px;
     width: 200vw;
     max-height: 100vh;
+    overflow-x:hidden;
 }
 .wave5{
     position:absolute;
@@ -258,9 +262,16 @@ button:active{
     width: 300vw;
     max-height: 100vh;
     transform: translate(-50%, -50%);
+    overflow-x:hidden;
 
 }
 
+.defaultpfp{
+    position:absolute;
+    width: 100px;
+    border: solid 5px lightblue;
+    border-radius: 5px;
+    z-index: 11;
+    
 
-
-
+}
