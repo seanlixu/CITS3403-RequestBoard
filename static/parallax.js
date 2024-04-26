@@ -9,9 +9,6 @@ const card = document.querySelector('.card')    ;
 document.addEventListener('scroll', function() {
         let value= window.scrollY;
         console.log(value);
-
-
-
         // wave1.style.transform = 'translateX(' + (value * -0.2) + 'px)';
         wave2.style.transform = 'translateX(' + (value * -0.5) + 'px)';
         // wave3.style.transform = 'translateX(' + (value * -1) + 'px)';
