@@ -1,5 +1,6 @@
 from app import app
-from flask import render_template
+import sqlite3
+from flask import request, render_template, jsonify
 from .login import login
 from .register import register_user
 
@@ -17,3 +18,7 @@ def register_route():
 @app.route('/home')
 def home():
     return render_template('home.html')
+
+@app.route('/user/<username>')
+def get_user(username):
+    pass
