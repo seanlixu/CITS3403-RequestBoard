@@ -1,7 +1,9 @@
-from app import app
+from app.userauth.app import app
 from flask import request, render_template, jsonify, redirect
 from flask import Flask
-from flask_login import LoginManager, current_user
+from models import User, db
+import flask_login
+from flask_login import LoginManager, current_user, login_user
 from flask_bcrypt import Bcrypt
 from forms import LoginForm
 import sqlite3
@@ -33,12 +35,12 @@ app = Flask(__name__)
 # Create Bcrypt object with app as param
 bcrypt = Bcrypt(app)
 
-# https://docs.python.org/3/library/sqlite3.html
-# Connect to users.db
-con = sqlite3.connect("users.db")
+# # https://docs.python.org/3/library/sqlite3.html
+# # Connect to users.db
+# con = sqlite3.connect("users.db")
 
-# Make connection for executing SQL queries
-cur = con.cursor()
+# # Make connection for executing SQL queries
+# cur = con.cursor()
 
 # Create login manager
 login_manager = LoginManager()
@@ -51,59 +53,48 @@ login_form = LoginForm()
 
 @app.route('/login/<username>, <password>', methods=['GET', 'POST'])
 def login():
-    # Get data from input
-    
+
     # logged_in = False
     # user and password variables from forms.py
     login_form = LoginForm()
     if login_form.validate_on_submit():
         user = login_form.username.data
-        password = login_form.username.data
+        password = login_form.password.data
 
 
-    # Testing
-    # data = {'username': 'user6', 'password': 'password9'}
-    # user = "user5"
-    # password = "pw2"
-    # cur.execute("SELECT * FROM user")
-    # rows = cur.fetchall()
-    # for row in rows:
-    #     print(row)
+        # Testing
+        # data = {'username': 'user6', 'password': 'password9'}
+        # user = "user5"
+        # password = "pw2"
+        # cur.execute("SELECT * FROM user")
+        # rows = cur.fetchall()
+        # for row in rows:
+        #     print(row)
 
 
-    # response variable for frontend access
-    # Check if user or password are empty
-    if not user or not password:
-        response = ErrorResponse('Username or Password not found') 
-        return jsonify(response.to_dictionary()), 400
+        # response variable for frontend access
+        # Check if user or password are empty
+        if not user or not password:
+            response = ErrorResponse('Username or Password not found') 
+            return jsonify(response.to_dictionary()), 400
+            
         
-    
-    # Select pw where username matches and if nothing return error
-    cur.execute("SELECT password FROM user WHERE username=?", (user,))
-    # Rename variable. Password tuple. Fetches data of password column
-    current_user = cur.fetchone()
+        user = User.query.filter_by(user=user).first()
+        # Rename variable. Password tuple. Fetches data of password column
 
-    # Check if any results returned
-    if not current_user:
-        response = ErrorResponse('No results found')
-        return jsonify(response.to_dictionary()), 404
-        
-    # Check if hashed password matches input password
-    if bcrypt.check_password_hash(current_user[0], password):
-        response = SuccessResponse('Login successful')
-        login_manager(user)
-        return redirect('/home')
-    else: 
-        response = ErrorResponse("Incorrect Password, try again")
-        return jsonify(response.to_dictionary), 401
-    
-    return render_template()
-# Create function that checks if user is logged in, implement login manager too for @loginrequired
-@login_manager.user_loader
-def load_user(user_id):
-    return get_user
+        # Check if any results returned
+        if not user:
+            response = ErrorResponse('No user with that name found')
+            return jsonify(response.to_dictionary()), 404
+            
+        # Check if hashed password matches input password
+        if bcrypt.check_password_hash(user.password_hashed, password):
+            login_user(user)
+            response = SuccessResponse('Login successful')
+            return redirect('/home')
+        else: 
+            response = ErrorResponse("Incorrect Password, try again")
+            return jsonify(response.to_dictionary), 401
+    return redirect('/login')   
 
-
-
-login()
 

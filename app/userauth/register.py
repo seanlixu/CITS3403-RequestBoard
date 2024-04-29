@@ -1,9 +1,9 @@
 # Imports
-import os
 from app import app
 from flask import Flask
-from flask import request, jsonify, render_template, redirect, flask_bcrypt
-# from flask_login import Loginmanager
+from flask import request, jsonify, render_template, redirect
+from flask_login import Loginmanager
+from models import User, db
 from forms import RegisterForm
 from flask_bcrypt import Bcrypt
 import sqlite3
@@ -32,11 +32,14 @@ app = Flask(__name__)
 # Create Bcrypt object with app as param
 bcrypt = Bcrypt(app)
 # https://docs.python.org/3/library/sqlite3.html
-# Connect to users.db
-con = sqlite3.connect("users.db")
 
-# Make connection for executing SQL queries
-cur = con.cursor()
+# revamped to SQLalchemy
+# # Connect to users.db
+# con = sqlite3.connect("users.db")
+
+# # Make connection for executing SQL queries
+# cur = con.cursor()
+
 
 
 @app.route('/register/<username>, <password>', methods=['GET', 'POST'])
@@ -45,8 +48,7 @@ def register_user():
 # Check if username and password are not empty, if they are return error
 # Check if username taken already
 # If not create new user and then add to database
-    data = request.json
-    register_form = RegisterForm
+    register_form = RegisterForm()
     if register_form.validate_on_submit():
         user = register_form.username.data
         password = register_form.password.data
@@ -57,44 +59,40 @@ def register_user():
     # If username and password not empty, return error
     # if user not in data or password not in data:
     #     return()
-    if not data.get('username') or not data.get('password'):
+        if not user or password:
+            response = ErrorResponse('Username or password not found')
+            return jsonify(response.to_dictionary()), 400
+
+
+        # Add checks for if its not the right type
+
+
+
+        # Add some password checks, like Must be capital. etc all that.
+        if len(user) > 20 or len(password) < 8 or len(password) > 30:
+            response = ErrorResponse('User must be less than 20 characters, Password must be between 8 and 30 characters')
+            return jsonify(response.to_dictionary()), 400
         
-        response = ErrorResponse('Username or password not found')
-        return jsonify(response.to_dictionary()), 400
 
 
-    # Add checks for if its not the right type
-
-
-
-
-    # Add some password checks, like Must be capital. etc all that.
-    if len(user) > 20 or len(password) < 8 or len(password) > 30:
-        response = ErrorResponse('User must be less than 20 characters, Password must be between 8 and 30 characters')
-        return jsonify(response.to_dictionary()), 400
-    
-
-
-    # Check if username already taken. Crosscheck with db
-    cur.execute("SELECT username FROM user WHERE username=?", (user,))
-    existing_user = cur.fetchone()
-
-    if existing_user:
-        # Change this to error
-        response = ErrorResponse('Username is taken, Please choose another')
-        return jsonify(response.to_dictionary), 409
+        # Check if username already taken. Crosscheck with db
+        existing_user = User.query.filter_by(username=user).first()
+        if existing_user:
+            # Change this to error
+            response = ErrorResponse('Username is taken, Please choose another')
+            return jsonify(response.to_dictionary), 409
         
-    else:
-        # Hash passwords before insert
+        
+            # Hash passwords before insert
         password_hashed = bcrypt.generate_password_hash(password)
-        # Insert into database after check is done
-        cur.execute("INSERT INTO user (username, password) VALUES (?, ?)", (user, password_hashed))
-        con.commit()
-        
+        new_user = User(username=user, password_hashed=password_hashed)
+        db.session.add(new_user)
+        db.session.commit()
+            
         response = SuccessResponse('Successful login')
         return redirect('/home')
-        
-register_user()
+    return redirect('/register')
+
     
 
 
