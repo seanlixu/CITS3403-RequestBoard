@@ -3,34 +3,14 @@ from app import app
 from flask import Flask
 from flask import request, jsonify, render_template, redirect
 from flask_login import Loginmanager
-from models import User, db
+from models import User, SuccessResponse, ErrorResponse
+from config import db
 from forms import RegisterForm
-from flask_bcrypt import Bcrypt
+from werkzeug.security import generate_password_hash
 import sqlite3
 
-class Response:
-    def __init__(self, status: str, message: str):
-        self.status = status
-        self.message = message
-    
-    def to_dictionary(self):
-        return {
-            'status': self.status,
-            'message': self.message,
-        }
-
-class SuccessResponse(Response):
-    def __init__(self, message: str = 'Success'):
-        super().__init__('sucess', message)
-
-class ErrorResponse(Response):
-    def __init__(self, message: str, status_code: int = 400):
-        super().__init__('error'. message)
-        self.status_code = status_code
-
 app = Flask(__name__)
-# Create Bcrypt object with app as param
-bcrypt = Bcrypt(app)
+
 # https://docs.python.org/3/library/sqlite3.html
 
 # revamped to SQLalchemy
@@ -84,7 +64,7 @@ def register_user():
         
         
             # Hash passwords before insert
-        password_hashed = bcrypt.generate_password_hash(password)
+        password_hashed = generate_password_hash(password)
         new_user = User(username=user, password_hashed=password_hashed)
         db.session.add(new_user)
         db.session.commit()
