@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html style="overflow-x: hidden;">
     <head>
         <title>Login</title>
         <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"> 
@@ -21,15 +21,19 @@
 
             <div class="card">
                 <h1>Login</h1>
-                <div class="input">
-                    <input type="text" placeholder="Username" required>
-                </div>
-                <div class="input">
-                    <input type="text" placeholder="Password" required>
-                </div>
-                <div>
-                    <button class="input">Log In </button>
-                </div>
+
+                <form action="">
+                    <div class="input">
+                        <input type="text" placeholder="Username" required>
+                    </div>
+                    <div class="input">
+                        <input type="text" placeholder="Password" required>
+                    </div>
+                    <div class="input">
+                        <input type="submit" value="Login"> 
+                    </div>
+                </form>
+                
                 <div class="options">
                     <input type="checkbox"> remember me
                     <a href="signUp.html"> sign up</a>
@@ -51,11 +55,18 @@
 
 
         <div class="info">
-            <img class="defaultpfp"src="static/defaultpfp.png">
-            <img class="defaultpfp"src="static/defaultpfp.png">
-            <img class="defaultpfp"src="static/defaultpfp.png">
-            <img class="defaultpfp"src="static/defaultpfp.png">
-            <img class="defaultpfp"src="static/defaultpfp.png">
+            <img id= "pfp1" class="defaultpfp"src="static/defaultpfp.png">
+            <img id= "pfp2" class="defaultpfp"src="static/defaultpfp.png">
+            <img id= "pfp3" class="defaultpfp"src="static/defaultpfp.png">
+            <img id= "pfp4" class="defaultpfp"src="static/defaultpfp.png">
+            <img id= "pfp5" class="defaultpfp"src="static/defaultpfp.png">
+            <img id= "pfp6" class="defaultpfp"src="static/defaultpfp.png">
+            <img id= "pfp7" class="defaultpfp"src="static/defaultpfp.png">
+            <img id= "job1" class="job" src="static/jobpost.png">
+            <img id= "job2" class="job" src="static/jobpost.png">
+            <img id= "job3" class="job" src="static/jobpost.png">
+
+
             
             <div class="infoCard">
                 <h4 style="text-align: left; margin-left: 10px;">A vast sea of talent & tasks,<br> all accessible with ONE account.</h4>

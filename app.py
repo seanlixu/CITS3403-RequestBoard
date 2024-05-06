@@ -5,6 +5,10 @@ app = Flask(__name__)
 def login():
     return render_template("login.html")
 
+@app.route("/register")
+def register():
+    return render_template("")
+
 @app.route("/userdashboard")
 def userDashboard():
     return render_template("userDashboard.html")

@@ -2,6 +2,11 @@
     font-family:"Poppins", sans-serif;
     margin:0;
     padding:0;
+    overflow-x:hidden;
+}
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
 }
 .loader {
     position: fixed;
@@ -43,6 +48,7 @@
     }
 }
   
+
 
 .login{
     display: flex;
@@ -130,14 +136,6 @@ button:active{
     z-index: 6;
 }
 
-/* .arrow{
-    font-size: 40px;
-    animation-name: bounce;
-    animation-duration: 4s;
-    animation-iteration-count: infinite;
-
-
-} */
 
 .arrow{
     animation: moveUpDown 2s linear infinite;
@@ -195,74 +193,40 @@ button:active{
     top: 0;
     left: 0;
     width: 100%;
-    overflow: hidden;
+    overflow-x: hidden;
     line-height: 0;
 }
-.wave1{
-
-    transition: transform 0.5s; /* Adjust duration as needed */
-}
-.wave2{
-
-    transition: transform 0s; /* Adjust duration as needed */
-}
-
-.wave4{
-    transition: transform 0s;
-}
-
-.wave6{
-    transition: transform 0s;
-}
 
 
-.wave1{
-    position:absolute;
-    z-index: 0;
-    top:0px;
-    width: 200vw;
-    max-height: 100vh;
-    
-    /* background: rgb(8,244,252); */
-}
+
+
 .wave2{
     position:absolute;
     z-index: 1;
     top: 40px;
-    width: 200vw;
+    width: 200%;
     max-height: 100vh;
-    overflow-x:hidden;
+    overflow-x: hidden;
+
 }
-.wave3{
-    position:absolute;
-    z-index: 2;
-    top:100px;
-    width: 200vw;
-    max-height: 100vh;
-}
+
 .wave4{
     position:absolute;
     z-index: 5;
     top:95px;
-    width: 200vw;
+    width: 200%;
     max-height: 100vh;
-    overflow-x:hidden;
+
 }
-.wave5{
-    position:absolute;
-    z-index: 5;
-    top:130px;
-    width: 200vw;
-    max-height: 100vh;
-}
+
 .wave6{
     position:absolute;
     z-index: 6;
-    top:100px;
-    width: 300vw;
+    top:150px;
+    width: 200%;
     max-height: 100vh;
-    transform: translate(-50%, -50%);
-    overflow-x:hidden;
+    /* transform: translate(-50%, -50%); */
+
 
 }
 
@@ -271,7 +235,58 @@ button:active{
     width: 100px;
     border: solid 5px lightblue;
     border-radius: 5px;
-    z-index: 11;
-    
+    z-index: 13;
+    overflow-x:hidden;
+}
+#pfp1{
+    top:850px;
+    left: 0px;
+}
+#pfp3{
+    top:1100px;
+    left: 0px;
+}
+#pfp5{
+    top:1400px;
+    left: 0px;
+}
+#pfp6{
+    top:1700px;
+    left: 0px;
+}
 
+#pfp2{
+    top:1000px;
+    left: 1400px;
+}
+#pfp4{
+    top:1500px;
+    left: 1400px;
+}
+/* #pfp7{
+    top: 800x;
+    left: 1400px;
+} */
+
+.job{
+
+    position:absolute;
+    width: 100px;
+    border: solid 5px lightblue;
+    border-radius: 5px;
+    z-index: 14;
+    overflow-x:hidden;
+
+}
+#job1{
+    top:850px;
+    left: 1400px;
+}
+#job2{
+    top:1500px;
+    left: 0px;
+}
+#job3{
+    top:1000px;
+    left: 1400px;
 }
