@@ -1,6 +1,10 @@
-from flask import Flask, request
+from app import flaskApp as app
+from flask import request
 import sqlite3
-app = Flask(__name__)
+
+# _c_ why are we using queries?
+
+
 # https://docs.python.org/3/library/sqlite3.html
 # Connect to users.db
 con = sqlite3.connect("users.db")

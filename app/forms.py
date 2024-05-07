@@ -1,6 +1,4 @@
-from flask import Flask
 from flask_wtf import FlaskForm
-from flask_sqlalchemy import SQLAlchemy
 from wtforms import StringField,  SubmitField, HiddenField, PasswordField
 from wtforms.validators import DataRequired, Length, Regexp
 

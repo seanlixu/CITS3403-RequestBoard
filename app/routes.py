@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect
+from flask import render_template, redirect
 from .register import register_user
 from .models import ErrorResponse, SuccessResponse, User
 from app import flaskApp, db

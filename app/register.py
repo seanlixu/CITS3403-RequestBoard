@@ -1,9 +1,6 @@
-# Imports
 from app import flaskApp, db
-from flask import Flask
-from flask import request, jsonify, render_template, redirect
+from flask import jsonify, render_template, redirect
 from .models import User, SuccessResponse, ErrorResponse
-# from app import flaskApp, db
 from .forms import RegisterForm
 from werkzeug.security import generate_password_hash
 
