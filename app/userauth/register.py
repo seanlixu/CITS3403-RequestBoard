@@ -7,20 +7,8 @@ from models import User, SuccessResponse, ErrorResponse
 from config import db
 from forms import RegisterForm
 from werkzeug.security import generate_password_hash
-import sqlite3
 
 app = Flask(__name__)
-
-# https://docs.python.org/3/library/sqlite3.html
-
-# revamped to SQLalchemy
-# # Connect to users.db
-# con = sqlite3.connect("users.db")
-
-# # Make connection for executing SQL queries
-# cur = con.cursor()
-
-
 
 @app.route('/register/<username>, <password>', methods=['GET', 'POST'])
 def register_user():
@@ -43,17 +31,10 @@ def register_user():
             response = ErrorResponse('Username or password not found')
             return jsonify(response.to_dictionary()), 400
 
-
-        # Add checks for if its not the right type
-
-
-
         # Add some password checks, like Must be capital. etc all that.
         if len(user) > 20 or len(password) < 8 or len(password) > 30:
             response = ErrorResponse('User must be less than 20 characters, Password must be between 8 and 30 characters')
             return jsonify(response.to_dictionary()), 400
-        
-
 
         # Check if username already taken. Crosscheck with db
         existing_user = User.query.filter_by(username=user).first()
@@ -61,18 +42,16 @@ def register_user():
             # Change this to error
             response = ErrorResponse('Username is taken, Please choose another')
             return jsonify(response.to_dictionary), 409
-        
-        
+
             # Hash passwords before insert
         password_hashed = generate_password_hash(password)
         new_user = User(username=user, password_hashed=password_hashed)
         db.session.add(new_user)
         db.session.commit()
             
-        response = SuccessResponse('Successful login')
-        return redirect('/home')
-    return redirect('/register')
-
+        response = SuccessResponse('Successful register')
+        return redirect('/login')
+    return render_template('register.html', form=register_form)
     
 
 
