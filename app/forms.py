@@ -6,10 +6,13 @@ from wtforms.validators import DataRequired, Length, Regexp
 
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired(), Length(min=8, max=30),  Regexp(r'[A-Za-z0-9]+',message='Password must contain Uppercase, lowercase and a number')])
+    password = StringField('Password', validators=[DataRequired()])
     csrf_token = HiddenField()
     submit = SubmitField('Login')
 
+    class Meta:
+        # Disable client-side validation temporarily
+        csrf = False
 
 class RegisterForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
