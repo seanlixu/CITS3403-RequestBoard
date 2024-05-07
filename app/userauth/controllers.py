@@ -11,7 +11,7 @@ from flask_login import LoginManager, current_user, login_required
 @app.route('/rate_user/<username>', methods=['POST'])
 @login_required
 def rate_user(username):
-
+    
     if current_user.is_authenticated:
         
         if current_user is None:

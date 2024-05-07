@@ -1,75 +1,63 @@
 # Imports
-from app import app
-from flask import request, jsonify, render_template, redirect, flask_bcrypt
-# from flask_login import Loginmanager
-from flask_bcrypt import Bcrypt
-import sqlite3
+from app import flaskApp, db
+from flask import Flask
+from flask import request, jsonify, render_template, redirect
+from .models import User, SuccessResponse, ErrorResponse
+# from app import flaskApp, db
+from .forms import RegisterForm
+from werkzeug.security import generate_password_hash
 
-app = Flask(__name__)
-# https://docs.python.org/3/library/sqlite3.html
-# Connect to users.db
-con = sqlite3.connect("users.db")
 
-# Make connection for executing SQL queries
-cur = con.cursor()
-
-# Create Bcrypt object with app as param
-bcrypt = Bcrypt(app)
-
-# Create database
-try:
-    cur.execute("CREATE TABLE user(id INTEGER PRIMARY KEY, username , password)")
-except sqlite3.OperationalError:
-    pass    
-
-@app.route('/register/<username>, <password>', methods=['GET', 'POST'])
+@flaskApp.route('/register', methods=['GET', 'POST'])
 def register_user():
 # https://www.geeksforgeeks.org/get-the-data-received-in-a-flask-request/
 # Check if username and password are not empty, if they are return error
 # Check if username taken already
 # If not create new user and then add to database
-    data = request.json
+    print('registering')
+    register_form = RegisterForm()
+    if register_form.validate_on_submit():
+        print('inside')
+        user = register_form.username.data
+        password = register_form.password.data
 
     # testing
     # data = {'username': 'user6', 'password': 'password6'}
-    
-    user = data.get('username')
-    password = data.get('password')
-
+    # print(user)
+        # print(password)
     # If username and password not empty, return error
     # if user not in data or password not in data:
     #     return()
-    if not data.get('username') or not data.get('password'):
-        response = {'status': 'error', 'message': 'User or password not found'}
-        return jsonify(response), 400
+   
+        if len(user) <= 0 or len(password) <= 0:
+            # message = 'User or pw not found'
+            response = ErrorResponse('Username or password not found')
+            return jsonify(response.to_dictionary()), 400
 
-    # Add some password checks, like Must be capital. etc all that.
-    if len(user) > 20 or len(password) < 8 or len(password) > 30:
-        status = 'User must be less than 20 characters, Password must be between 8 and 30 characters'
-        response = {'status': 'error', 'message': 'Password must be between 8 and 30 characters'}
-        return jsonify(response), 400
-           
-    # Check if username already taken. Crosscheck with db
-    cur.execute("SELECT username FROM user WHERE username=?", (user,))
-    existing_user = cur.fetchone()
+        # Add some password checks, like Must be capital. etc all that.
+        if len(user) > 20 or len(password) < 8 or len(password) > 30:
+            response = ErrorResponse('User must be less than 20 characters, Password must be between 8 and 30 characters')
+            # print("check 1 worked")
+            return jsonify(response.to_dictionary()), 400
 
-    if existing_user:
-        # Change this to error
-        status = 'Username is taken, Please choose another'
-        response = {'status': 'error', 'message': 'Username is taken'}
-        return jsonify(response), 409
-        
+        # Check if username already taken. Crosscheck with db
+        existing_user = db.session.query(User).filter_by(username=user).first()
+        if existing_user:
+            # Change this to error
+            response = ErrorResponse('Username is taken, Please choose another')
+            return jsonify(response.to_dictionary()), 409
+
+            # Hash passwords before insert
+        password_hashed = generate_password_hash(password)
+        new_user = User(username=user, password=password_hashed)
+        db.session.add(new_user)
+        db.session.commit()
+        # print('finished')
+        response = SuccessResponse('Successful register')
+        return redirect('/login')
     else:
-        # Hash passwords before insert
-        password_hashed = bcrypt.generate_password_hash(password)
-        # Insert into database after check is done
-        cur.execute("INSERT INTO user (username, password) VALUES (?, ?)", (user, password_hashed))
-        con.commit()
-        
-        response = {'status': 'success', 'message': 'Account created'}
-        return redirect('/home')
-        
-register_user()
+        print('form valid failed')
+        return render_template('/test.html', form=register_form)
     
 
 
