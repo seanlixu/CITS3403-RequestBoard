@@ -46,7 +46,7 @@ def login():
             response = SuccessResponse('Login successful')
             # print('check pw worked')
             # Change to home page .html
-            return redirect('/userDashboard')
+            return redirect('/userdashboard')
         
         else: 
             response = ErrorResponse("Incorrect Password, try again")
