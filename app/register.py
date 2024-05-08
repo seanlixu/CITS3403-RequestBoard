@@ -54,8 +54,10 @@ def register_user():
         db.session.commit()
         # print('finished')
         response = SuccessResponse('Successful register')
-        return redirect('/login')
+        # Sean change to login.html
+        return redirect('/home')
     else:
+        # change to register.html or whatever.html when register fails.
         print('form valid failed')
         return render_template('/test.html', form=register_form)
     

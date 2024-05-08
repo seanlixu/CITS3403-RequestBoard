@@ -9,8 +9,12 @@ class User(db.Model):
     ratings = db.Column(db.Float(5.0), default=0.0)
     ratings_count = db.Column(db.Integer(), default=0)
 
+    def is_active(self):
+        return self.is_active
     # posts = relationship('Post', backref='author', lazy='dyanmic')
 
+    def get_id(self):
+        return str(self.id)
 
     
 class Response:
