@@ -57,7 +57,7 @@ def register_user():
         return redirect('/login')
     else:
         print('form valid failed')
-        return render_template('/test.html', form=register_form)
+        return render_template('/register.html', form=register_form)
     
 
 

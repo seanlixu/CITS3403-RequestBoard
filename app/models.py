@@ -8,9 +8,21 @@ class User(db.Model):
     password = db.Column(db.String(128), nullable=False)
     ratings = db.Column(db.Float(5.0), default=0.0)
     ratings_count = db.Column(db.Integer(), default=0)
+    # author = db.relationship('Post', backref='posts', lazy='dyanmic')
 
-    # posts = relationship('Post', backref='author', lazy='dyanmic')
+    def is_authenticated(self):
+        return self.is_authenticated
+    
+    def is_active(self):
+        return self.is_active
 
+    def get_id(self):
+        return str(self.id)
+
+class Post(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(80), nullable=False)
+    content = db.Column(db.String(255))
 
     
 class Response:
@@ -32,4 +44,3 @@ class ErrorResponse(Response):
     def __init__(self, message: str = 'Error'):
         super().__init__('error', message)
     
-        

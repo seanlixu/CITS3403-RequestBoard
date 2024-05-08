@@ -1,23 +1,22 @@
-from flask import Flask, render_template, redirect
-from .register import register_user
-from .models import ErrorResponse, SuccessResponse, User
 from app import flaskApp, db
-from app import flaskApp, db
-
+from flask import Flask
 from flask import request, jsonify, redirect, render_template
-
+from .models import User, SuccessResponse, ErrorResponse
 from flask_login import LoginManager, current_user, login_user, logout_user
 from werkzeug.security import check_password_hash
 from .forms import LoginForm
 
+ 
 
+# Create login manager
+login_manager = LoginManager()
+login_manager.init_app(flaskApp)
 
-@flaskApp.route("/")
-def home():
-    return render_template("register.html")
+# Need secret key for login manager in config.py for now
 
-@flaskApp.route('/login', methods=['GET', 'POST'])
+@flaskApp.route('/login', methods=['POST'])
 def login():
+
     # user and password variables from forms.py
     print('logging in')
     login_form = LoginForm()
@@ -56,33 +55,3 @@ def login():
         print('form failed')
         print(login_form.errors)
         return render_template('login.html', form=login_form)
-
-@flaskApp.route('/register', methods=['GET', 'POST'])
-def register():
-    return render_template("register.html")
-
-@flaskApp.route("/userdashboard")
-def userDashboard():
-    return render_template("userDashboard.html")
-
-@flaskApp.route("/profile")
-def profile():
-    return render_template("profile.html")
-
-
-# @flaskApp.route('/register', methods=['GET', 'POST'])
-# def test_register():
-#     # users = db.session.query('users.db').all()  # Query all users
-#     # for user in users:
-#     #     print(user.username)
-#     response = register_user()
-    
-#     # Handle successful or error response from register_user
-#     if isinstance(response, ErrorResponse):  # Check for error response
-#         # Display error message to the user (e.g., render a template)
-#         return render_template('register.html', error_message=response.message)
-#     else:
-#         # Handle successful registration (e.g., redirect to login page)
-#         return redirect('/login')
-
-    # return render_template('register.html')  # Placeholder for GET request
