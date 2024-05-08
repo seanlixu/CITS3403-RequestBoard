@@ -1,35 +1,37 @@
-from flask import render_template, redirect
-from .register import register_user
-from .models import ErrorResponse, SuccessResponse, User
-from app import flaskApp, db
+from flask import flash, render_template, redirect, url_for
+from flask_login import login_required
+from app import flaskApp
+from .authentication import handle_register, handle_login, handle_logout
 
 
 @flaskApp.route("/")
+@flaskApp.route("/home")
+@flaskApp.route("/index")
+@login_required
 def home():
-    return render_template("test.html")
-
-@flaskApp.route('/login', methods=['GET', 'POST'])
-def test_login():
-    # return "<p> logged in </p>"
-    return render_template("test.html")
+    posts = [
+        {
+            'author': {'username': 'John'},
+            'body': 'Beautiful day in Portland!'
+        },
+        {
+            'author': {'username': 'Susan'},
+            'body': 'The Avengers movie was so cool!'
+        }
+    ]
+    return render_template('index.html', posts=posts)
 
 @flaskApp.route('/register', methods=['GET', 'POST'])
-def register_route():
-    return register_user()
+def register():
+    return handle_register()
 
-# @flaskApp.route('/register', methods=['GET', 'POST'])
-# def test_register():
-#     # users = db.session.query('users.db').all()  # Query all users
-#     # for user in users:
-#     #     print(user.username)
-#     response = register_user()
-    
-#     # Handle successful or error response from register_user
-#     if isinstance(response, ErrorResponse):  # Check for error response
-#         # Display error message to the user (e.g., render a template)
-#         return render_template('register.html', error_message=response.message)
-#     else:
-#         # Handle successful registration (e.g., redirect to login page)
-#         return redirect('/login')
+@flaskApp.route('/login', methods=['GET', 'POST'])
+@flaskApp.route('/login/<string:field>', methods=['GET', 'POST'])
+def login(field='username'):
+    return handle_login(field)
 
-    # return render_template('register.html')  # Placeholder for GET request
+@flaskApp.route('/logout')
+def logout():
+    return handle_logout()
+
+
