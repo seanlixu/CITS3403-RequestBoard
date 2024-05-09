@@ -2,6 +2,7 @@ from app import db
 # from sqlalchemy.orm import relationship
 
 
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(40), unique=True, nullable=False)
