@@ -59,7 +59,7 @@ def register_user():
     else:
         # change to register.html or whatever.html when register fails.
         print('form valid failed')
-        return render_template('/test.html', form=register_form)
+        return render_template('/register.html', form=register_form)
     
 
 

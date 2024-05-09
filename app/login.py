@@ -14,7 +14,9 @@ login_manager.init_app(flaskApp)
 
 # Need secret key for login manager in config.py for now
 
-@flaskApp.route('/login', methods=['GET', 'POST'])
+
+@flaskApp.route('/login', methods=['POST'])
+
 def login():
 
     # user and password variables from forms.py
@@ -45,7 +47,9 @@ def login():
             response = SuccessResponse('Login successful')
             # print('check pw worked')
             # Change to home page .html
-            return redirect('/home')
+
+            return redirect('/userDashboard')
+
         
         else: 
             response = ErrorResponse("Incorrect Password, try again")
@@ -53,4 +57,7 @@ def login():
     else:
         # Change to login.html?
         print('form failed')
-        return render_template('test.html', form=login_form)
+
+        print(login_form.errors)
+        return render_template('login.html', form=login_form)
+

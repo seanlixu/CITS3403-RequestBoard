@@ -2,6 +2,7 @@ from app import db
 # from sqlalchemy.orm import relationship
 
 
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(40), unique=True, nullable=False)
@@ -16,6 +17,7 @@ class User(db.Model):
     def is_active(self):
         return self.is_active
 
+
     def get_id(self):
         return str(self.id)
 
@@ -23,6 +25,7 @@ class User(db.Model):
         return str(self.username)
     
     
+
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(80), nullable=False)
@@ -48,4 +51,3 @@ class ErrorResponse(Response):
     def __init__(self, message: str = 'Error'):
         super().__init__('error', message)
     
-        
