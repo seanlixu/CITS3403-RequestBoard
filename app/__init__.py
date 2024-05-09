@@ -38,6 +38,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
 
+
 # Flask app name
 flaskApp = Flask(__name__)
 # Setting config
@@ -54,13 +55,14 @@ login_manager.init_app(flaskApp)  # Add this line
 def load_user(user_id):  # Add this line
     return User.query.get(int(user_id))  # Add this line
 
+# FOR testing and create db
 @flaskApp.cli.command('initdb')
 def initdb_command():
     """Creates the database tables."""
     print("created")
     db.create_all()
 
-# ... rest of your application code
+
 
 # @flaskApp.route("/")
 # def main():
@@ -68,3 +70,4 @@ def initdb_command():
 
 from .models import User  # Move this line to the end
 from app import models, routes
+

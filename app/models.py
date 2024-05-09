@@ -17,8 +17,14 @@ class User(db.Model):
     def is_active(self):
         return self.is_active
 
+
     def get_id(self):
         return str(self.id)
+
+    def get_user(self):
+        return str(self.username)
+    
+    
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)

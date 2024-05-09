@@ -1,6 +1,8 @@
 from flask import Flask, render_template, redirect
 from .register import register_user
+from .login import login, logout_user
 from .models import ErrorResponse, SuccessResponse, User
+from flask_login import LoginManager
 from app import flaskApp, db
 from app import flaskApp, db
 
@@ -11,12 +13,22 @@ from werkzeug.security import check_password_hash
 from .forms import LoginForm
 
 
+# Login manager
+login_manager = LoginManager()
+login_manager.init_app(flaskApp)
+
+@login_manager.user_loader
+def load_user(user_id):
+    user = User.query.get(user_id)
+    return user
 
 @flaskApp.route("/")
+@flaskApp.route("/home")
 def home():
     return render_template("register.html")
 
 @flaskApp.route('/login', methods=['GET', 'POST'])
+
 def login():
     # user and password variables from forms.py
     print('logging in')
@@ -59,7 +71,54 @@ def login():
 
 @flaskApp.route('/register', methods=['GET', 'POST'])
 def register():
-    return render_template("register.html")
+    # https://www.geeksforgeeks.org/get-the-data-received-in-a-flask-request/
+    # Check if username and password are not empty, if they are return error
+    # Check if username taken already
+    # If not create new user and then add to database
+    print('registering')
+    register_form = RegisterForm()
+    if register_form.validate_on_submit():
+        print('inside')
+        user = register_form.username.data
+        password = register_form.password.data
+
+    # testing
+    # data = {'username': 'user6', 'password': 'password6'}
+    # print(user)
+        # print(password)
+    # If username and password not empty, return error
+    # if user not in data or password not in data:
+    #     return()
+   
+        if len(user) <= 0 or len(password) <= 0:
+            # message = 'User or pw not found'
+            response = ErrorResponse('Username or password not found')
+            return jsonify(response.to_dictionary()), 400
+
+        # Add some password checks, like Must be capital. etc all that.
+        if len(user) > 20 or len(password) < 8 or len(password) > 30:
+            response = ErrorResponse('User must be less than 20 characters, Password must be between 8 and 30 characters')
+            # print("check 1 worked")
+            return jsonify(response.to_dictionary()), 400
+
+        # Check if username already taken. Crosscheck with db
+        existing_user = db.session.query(User).filter_by(username=user).first()
+        if existing_user:
+            # Change this to error
+            response = ErrorResponse('Username is taken, Please choose another')
+            return jsonify(response.to_dictionary()), 409
+
+            # Hash passwords before insert
+        password_hashed = generate_password_hash(password)
+        new_user = User(username=user, password=password_hashed)
+        db.session.add(new_user)
+        db.session.commit()
+        # print('finished')
+        response = SuccessResponse('Successful register')
+        return redirect('/login')
+    else:
+        print('form valid failed')
+        return render_template('/register.html', form=register_form)
 
 @flaskApp.route("/userdashboard")
 def userDashboard():
@@ -86,3 +145,12 @@ def profile():
 #         return redirect('/login')
 
     # return render_template('register.html')  # Placeholder for GET request
+
+
+@flaskApp.route('/logout', methods=['GET', 'POST'])
+def logout_route():
+    logout_user()
+    return redirect('/home')
+
+
+
