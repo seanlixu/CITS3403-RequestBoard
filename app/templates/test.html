@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login & Registration</title>
+</head>
+<body>
+  <h1>Login or Register</h1>
+
+  <div id="login-container">
+    <h2>Login</h2>
+    <form action="/login" method="post">
+        <label for="username">Username:</label>
+      <input type="text" id="username" name="username" placeholder="Enter your username" required><br><br>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" placeholder="Enter your password" required><br><br>
+      <button type="submit">Login</button>
+    </form>
+  </div>
+
+  <div id="register-container">
+    <h2>Register</h2>
+    <form action="/register" method="post">
+       <label for="new-username">Username:</label>
+      <input type="text" id="new-username" name="username" placeholder="Enter your username" required><br><br>
+      <label for="new-password">Password:</label>
+      <input type="password" id="new-password" name="password" placeholder="Enter your password" required><br><br>
+      <label for="confirm-password">Confirm Password:</label>
+      <input type="password" id="confirm-password" name="confirm_password" placeholder="Confirm your password" required><br><br>
+      <button type="submit">Register</button>
+    </form>
+  </div>
+
+  <h2>Create Post</h2>
+  <form action="/create" method="post">
+    <label for="post-title">Title:</label>
+    <input type="text" id="post-title" name="title" placeholder="Enter your post title" required><br><br>
+    <label for="post-content">Content:</label>
+    <textarea id="post-content" name="content" rows="5" cols="80" placeholder="Write your post content here" required></textarea><br><br>
+    <button type="submit">Create Post</button>
+  </form>
+
+  <a href="/logout">Logout</a>
+
+  <style>
+    #login-container, #register-container {
+      display: inline-block;
+      margin: 10px;
+      padding: 15px;
+      border: 1px solid #ddd;
+    }
+  </style>
+</body>
+</html>

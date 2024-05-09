@@ -32,6 +32,7 @@ class RegisterForm(FlaskForm):
         if user:
             raise ValidationError("Email is already registered! Please use a different email address or Log in")
 
+
 class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=[
         DataRequired(),

@@ -72,4 +72,3 @@ class ErrorResponse(Response):
     def __init__(self, message: str = 'Error'):
         super().__init__('error', message)
     
-        
