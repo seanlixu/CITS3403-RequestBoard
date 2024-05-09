@@ -11,6 +11,7 @@ flaskApp.config.from_object(Config)
 
 login = LoginManager(flaskApp)
 login.login_view = 'login'
+login.login_message_category = 'info'
 
 db = SQLAlchemy(flaskApp)
 migrate = Migrate(flaskApp, db)

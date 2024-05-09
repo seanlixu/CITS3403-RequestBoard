@@ -35,6 +35,7 @@ def handle_login(field='username'):
         if form.validate_on_submit():
             user = User.query.filter_by(email=form.email.data).first()
             
+            # extra server side check to see if user exists
             if not user:
                 flash('Email does not exist! Please register or try again', 'danger')
                 return redirect(url_for('login', field='email'))
@@ -55,6 +56,7 @@ def handle_login(field='username'):
         if form.validate_on_submit():
             user = User.query.filter_by(username=form.username.data).first()
             
+            # extra server side check to see if user exists
             if not user:
                 flash('Username does not exist! Please register or try again', 'danger')
                 return redirect(url_for('login', field='username'))
