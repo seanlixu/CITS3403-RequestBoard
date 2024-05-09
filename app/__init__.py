@@ -6,6 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 
 
+
 # Flask app name
 flaskApp = Flask(__name__)
 # Setting config
@@ -15,6 +16,7 @@ db = SQLAlchemy(flaskApp)
 
 migrate = Migrate(flaskApp, db)
 
+
 # FOR testing and create db
 @flaskApp.cli.command('initdb')
 def initdb_command():
@@ -22,9 +24,5 @@ def initdb_command():
     print("created")
     db.create_all()
 
-# ... rest of your application code
 
-# @flaskApp.route("/")
-# def main():
-#     return render_template('test.html')
 from app import models, routes
