@@ -1,10 +1,13 @@
 from flask import Flask, render_template, redirect
 from .register import register_user
-from .login import login, logout_user
+# from .login import login, logout_user
 from .models import ErrorResponse, SuccessResponse, User
 from flask_login import LoginManager
 from app import flaskApp, db
 from app import flaskApp, db
+from .forms import RegisterForm
+from werkzeug.security import generate_password_hash
+
 
 from flask import request, jsonify, redirect, render_template
 
@@ -17,6 +20,7 @@ from .forms import LoginForm
 login_manager = LoginManager()
 login_manager.init_app(flaskApp)
 
+
 @login_manager.user_loader
 def load_user(user_id):
     user = User.query.get(user_id)
@@ -28,7 +32,6 @@ def home():
     return render_template("register.html")
 
 @flaskApp.route('/login', methods=['GET', 'POST'])
-
 def login():
     # user and password variables from forms.py
     print('logging in')
@@ -118,6 +121,7 @@ def register():
         return redirect('/login')
     else:
         print('form valid failed')
+        print(" >> "    + str(register_form.errors))
         return render_template('/register.html', form=register_form)
 
 @flaskApp.route("/userdashboard")
