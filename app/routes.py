@@ -7,19 +7,8 @@ from .authentication import handle_register, handle_login, handle_logout
 @flaskApp.route("/")
 @flaskApp.route("/home")
 @flaskApp.route("/index")
-@login_required
 def home():
-    posts = [
-        {
-            'author': {'username': 'John'},
-            'body': 'Beautiful day in Portland!'
-        },
-        {
-            'author': {'username': 'Susan'},
-            'body': 'The Avengers movie was so cool!'
-        }
-    ]
-    return render_template('index.html', posts=posts)
+    return render_template('index.html', title='Home')
 
 @flaskApp.route('/register', methods=['GET', 'POST'])
 def register():
@@ -34,4 +23,8 @@ def login(field='username'):
 def logout():
     return handle_logout()
 
+@flaskApp.route('/account')
+@login_required
+def account():
+    return render_template('account.html', title='Account')
 

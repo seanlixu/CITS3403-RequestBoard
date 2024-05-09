@@ -5,12 +5,18 @@ from werkzeug.security import generate_password_hash
 
 john = User(username='John', email='john@john.com', password=generate_password_hash('Password1'))
 jane = User(username='Jane', email='jane@jane.com', password=generate_password_hash('Password2'))
-bob = User(username='Bob', email='bob@bob.com', password=generate_password_hash('Password3'))
+bob = User(username='Bobby', email='bob@bob.com', password=generate_password_hash('Password3'))
 alice = User(username='Alice', email='alice@alice.com', password=generate_password_hash('Password4'))
 
 post1 = Post(title='John post 1', content='Iamjohn', author=john)
 post2 = Post(title='John post 2', content='Iamjohn', author=john)
 post3 = Post(title='Jane post 1', content='Iamjane', author=jane)
+
+post1.assigned = True
+post1.assigned_user = bob
+
+post3.assigned = True
+post3.assigned_user = alice
 
 db.session.add_all([john, jane, bob, alice, post1, post2, post3])
 db.session.commit()
