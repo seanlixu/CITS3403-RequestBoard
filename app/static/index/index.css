@@ -1,0 +1,251 @@
+div {
+    /* border: 1px solid black; */
+    
+}
+#loginbutton{
+    border: black solid 1px;
+    border-radius: 20px;;
+    height:20px;
+}
+
+#poster {
+    background:#0099ff;
+    height: 70vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.wave {
+
+    width: 200vw; /* Double the width to accommodate the longer wave */
+    height:50px;
+    background: #0099ff;
+    clip-path: path('M0 30 Q30 60 60 30 T120 30 T180 30 T240 30 T300 30 T360 30 T420 30 T480 30 T540 30 T600 30 T660 30 T720 30 T780 30 T840 30 T900 30 T960 30 T1020 30 T1080 30 T1140 30 T1200 30 V60 H0 Z');
+}
+
+#getstarted{
+    background:#0099ff;
+    height: 14.5vh;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+#getstartedbutton{
+    border: solid white 2px;
+    height: 50px;
+    padding-top: 10px;
+    width: 200px;
+
+}
+#getstartedbutton:hover{
+    border: solid white 2px;
+    height: 50px;
+    padding-top: 10px;
+    width: 200px;
+
+}
+
+.fish {
+    height: 150px;
+    width: auto;  /* This will maintain the aspect ratio */
+}
+
+#f1 {
+    position: absolute;
+    top:10%;
+    left: 5%;
+
+}
+
+#f2 {
+    position: absolute;
+    top:30%;
+    left: 10%;
+}
+
+#f3 {
+    position: absolute;
+    top:50%;
+    left: 1%;
+}
+#f4 {
+    position: absolute;
+    top:70%;
+    left: 5%;
+}
+ /* this is the right side */
+#f5 {
+    position: absolute;
+    top:5%;
+    left: 85%;
+}
+
+#f6 {
+    position: absolute;
+    top:30%;
+    left: 80%;
+}
+
+#f7 {
+    position: absolute;
+    top:50%;
+    left: 90%;
+}
+
+#f8 {
+    position: absolute;
+    top:70%;
+    left: 85%;
+}
+
+#user{
+    position: relative;
+    height:700px;
+    top: -45%;
+    left:3%;
+    z-index: 1;
+    /* height:100px;
+    top: 50%;
+    left:46%;
+    z-index: 2; */
+}
+
+#line{
+    position: absolute;
+    height:700px;
+    top: -85%;
+    left:10%;
+    z-index: 1;
+}
+
+#hook{
+
+    position: absolute;
+    height:700px;
+    top: -85%;
+    left:10%;
+    z-index: 3;
+    
+}
+
+.defaultpfp{
+    position:absolute;
+    width: 100px;
+    border: solid 5px lightblue;
+    border-radius: 5px;
+    z-index: 13;
+    overflow-x:hidden;
+}
+
+.info{
+    background: linear-gradient(to bottom, #0099ff, #00125a);
+    padding: 50vh 50px;
+    z-index: 6;
+    position: relative;
+}
+#pfp1{
+    top:160px;
+    left: 0px;
+}
+#pfp3{
+    top:320px;
+    left: 0px;
+}
+#pfp5{
+    top:480px;
+    left: 0px;
+}
+#pfp6{
+    top:550px;
+    left: 0px;
+}
+
+#pfp2{
+    top:200px;
+    left: 90%;
+}
+#pfp4{
+    top:300px;
+    left: 90%;
+}
+#pfp8{
+    top:300px;
+    left: 90%;
+}
+
+
+
+.job{
+
+    position:absolute;
+    width: 100px;
+    border: solid 5px lightblue;
+    border-radius: 5px;
+    z-index: 14;
+    overflow-x:hidden;
+
+
+}
+#job1{
+    top:300px;
+    left: 90%px;
+}
+#job2{
+    top:600px;
+    left: 90%px;
+}
+#job3{
+
+    top:650px;
+    left: 90%;
+}
+#job4{
+
+    top:200px;
+    left: 0px;
+}
+
+.infoCard{
+    width: 60vw;
+    height: fit-content;
+    border-radius: 70px;
+    padding:27px 30px;
+    border: solid 2px whitesmoke;
+    background-color: white;
+    color: rgba(5,8,104,255);
+    z-index: 11;
+    left: 50%;
+
+}
+.arrow{
+    animation: moveUpDown 2s linear infinite;
+    color: white;
+    position: absolute;
+    left: 50%;
+    z-index: 10;
+
+}
+
+@keyframes moveUpDown {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    15% {
+        transform: translateY(-15px);
+    }
+    20%{
+        transform: translateY(0);
+    }
+    25%{
+        transform: translateY(-7px);
+    }
+    27%{
+        transform: translateY(0px);
+    }
+
+}

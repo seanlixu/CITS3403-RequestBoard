@@ -1,63 +1,16 @@
-*{
-    font-family:"Poppins", sans-serif;
-    margin:0;
-    padding:0;
-    overflow-x:hidden;
-}
-html, body {
+/* 
+body {
     max-width: 100%;
     overflow-x: hidden;
-}
-.loader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #333333;
-    transition: opacity 0.75s, visibility 0.75s;
-    z-index: 11;
-  }
-  
-.loader--hidden {
-    opacity: 0;
-    visibility: hidden;
-    
-}
 
-.loader::after {
-    content: "";
-    width: 75px;
-    height: 75px;
-    border: 15px solid #dddddd;
-    border-top-color: #009578;
-    border-radius: 50%;
-    animation: loading 0.75s ease infinite;
-    z-index: 12;
-}
+    background:rgb(0, 242, 255);
+} */
 
-@keyframes loading {
-    from {
-        transform: rotate(0turn);
-    }
-    to {
-        transform: rotate(1turn);
-    }
-}
-  
-
-
-.login{
+.login {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 97vh;
-    background:rgb(0, 242, 255);
-    
-    
 }
 
 .card{
@@ -66,14 +19,20 @@ html, body {
     padding:27px 30px;
     border: solid 2px whitesmoke;
     padding-bottom: 40px;
-    
-    z-index: 10;
-
+    z-index: 20;
     background: rgba(255, 255, 255, 0.5);
-    position: fixed;
+    top: 35%
+}
 
-
-
+.registercard{
+    width: 365px;
+    border-radius: 20px;
+    padding:27px 30px;
+    border: solid 2px whitesmoke;
+    padding-bottom: 40px;
+    z-index: 20;
+    background: rgba(255, 255, 255, 0.5);
+    margin-top: 30px;
 }
 
 .card h1{
@@ -86,12 +45,8 @@ html, body {
     background: transparent;
     border-radius: 30px;
     border: solid 2px whitesmoke;
-    margin-top: 5px;
+    margin-top: 5px; 
     margin-bottom: 5px;
-
-    
-
-
 }
 
 .input input{
@@ -112,100 +67,74 @@ button {
     cursor: pointer;
     transition: 0.4s;
     font-size: 19px;
-    
 }
+
 button:hover{
-    font-size: 18px;
-
+    color:rgb(83, 83, 83);
 }
-
 
 button:active{
     background-color:grey;
-
-}
-
-.info{
-    background: black;
-    padding: 50vh 50px;
-    z-index: 6;
-}
-
-.downArrow{
-    text-align: center;
-    color:rgb(0, 0, 0);
-    height: 25px;
-    z-index: 6;
-}
-
-
-.arrow{
-    animation: moveUpDown 2s linear infinite;
-    color: rgb(116, 116, 116);
-    position: absolute;
-    top:96%;
-    z-index: 6;
-
-}
-
-@keyframes moveUpDown {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    15% {
-        transform: translateY(-15px);
-    }
-    20%{
-        transform: translateY(0);
-    }
-    25%{
-        transform: translateY(-7px);
-    }
-    27%{
-        transform: translateY(0px);
-    }
-
-}
-
-.info{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    text-align: left;
-    background: rgba(5,8,104,255);
-
-    z-index: 7;
-}
-
-.infoCard{
-    width: 60vw;
-    height: fit-content;
-    border-radius: 70px;
-    padding:27px 30px;
-    border: solid 2px whitesmoke;
-    background-color: white;
-    color: rgba(5,8,104,255);
-    z-index: 11;
-}
-
-
-.custom-shape-divider-top-1713266314 {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    overflow-x: hidden;
-    line-height: 0;
 }
 
 
 
 
-.wave2{
+
+
+
+
+.wave {
+    position:relative;
+    width: 1000vw; /* 5 times longer than before */
+    height: 50px;
+    clip-path: path('M0 30 Q30 60 60 30 T120 30 T180 30 T240 30 T300 30 T360 30 T420 30 T480 30 T540 30 T600 30 T660 30 T720 30 T780 30 T840 30 T900 30 T960 30 T1020 30 T1080 30 T1140 30 T1200 30 V60 H0 Z');
+}
+#wave1{
+    
+    background: #0099ff;
+    z-index: 1;
+    top:80px;
+}
+#wave2{
+    background: #00449d;
+    z-index: 2; 
+    top:280px;
+
+}
+#wave3{
+    background: #000986;
+    z-index: 3; 
+    top:480px;
+}
+
+#wave1body{
+    position:relative;
+    height: 200px;
+    background: #0099ff;
+    z-index: 1;
+    margin-top:80px;
+}
+#wave2body{
+    height: 200px;
+    background: #00449d;
+    z-index: 2; 
+    margin-top:0px;
+}
+
+#wave3body{
+    height: 200px;
+    background: #000986;
+    z-index: 3; 
+    margin-top:0px;
+}
+
+
+
+/* .wave2{
     position:absolute;
     z-index: 1;
-    top: 40px;
+    top: 20px;
     width: 200%;
     max-height: 100vh;
     overflow-x: hidden;
@@ -215,7 +144,7 @@ button:active{
 .wave4{
     position:absolute;
     z-index: 5;
-    top:95px;
+    top:70px;
     width: 200%;
     max-height: 100vh;
 
@@ -224,72 +153,9 @@ button:active{
 .wave6{
     position:absolute;
     z-index: 6;
-    top:150px;
+    top:130px;
     width: 200%;
     max-height: 100vh;
     /* transform: translate(-50%, -50%); */
 
 
-}
-
-.defaultpfp{
-    position:absolute;
-    width: 100px;
-    border: solid 5px lightblue;
-    border-radius: 5px;
-    z-index: 13;
-    overflow-x:hidden;
-}
-#pfp1{
-    top:850px;
-    left: 0px;
-}
-#pfp3{
-    top:1100px;
-    left: 0px;
-}
-#pfp5{
-    top:1400px;
-    left: 0px;
-}
-#pfp6{
-    top:1700px;
-    left: 0px;
-}
-
-#pfp2{
-    top:1000px;
-    left: 1400px;
-}
-#pfp4{
-    top:1500px;
-    left: 1400px;
-}
-/* #pfp7{
-    top: 800x;
-    left: 1400px;
-} */
-
-.job{
-
-    position:absolute;
-    width: 100px;
-    border: solid 5px lightblue;
-    border-radius: 5px;
-    z-index: 14;
-    overflow-x:hidden;
-
-}
-#job1{
-    top:900px;
-    left: 1400px;
-}
-#job2{
-    top:1500px;
-    left: 0px;
-}
-#job3{
-
-    top:1000px;
-    left: 1400px;
-}
