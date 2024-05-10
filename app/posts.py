@@ -1,8 +1,8 @@
 from app import flaskApp, db
-from flask import request, jsonify,redirect
+from flask import request, jsonify, redirect, flash, url_for
 from flask_login import login_required, current_user
 from .forms import PostForm
-from .models import Post
+from .models import Post, User
 
 
 @login_required
@@ -35,5 +35,31 @@ def get_all_posts():
             'title': post.title,
             'content': post.content
         }
+        post_data.append(data)
+    return jsonify(post_data)
+
+
+def get_created_jobs(username):
+    user = User.query.filter_by(username=username).first()
+    if user:
+        user_posts = user.posts
+        post_data = []
+
+        for post in user_posts:
+            data = [post.title, post.content]
+        post_data.append(data)
+        return jsonify(post_data)
+    else:
+        flash("User not found")
+        # create posts route
+        return redirect(url_for(''))
+    
+def get_applied_jobs(username):
+    user  = User.query.filter_by(username=username).first()
+    if user:
+        applied_posts = user.assigned_posts.all()
+        post_data = []
+        for post in applied_posts:
+            data = [post.title, post.content]
         post_data.append(data)
     return jsonify(post_data)
