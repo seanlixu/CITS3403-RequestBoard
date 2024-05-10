@@ -1,1 +1,6 @@
+.venv
+*.pyc
+*.db
+.env
+todo.txt
 .DS_Store
