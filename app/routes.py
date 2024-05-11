@@ -23,8 +23,8 @@ def login(field='username'):
 def logout():
     return handle_logout()
 
-@flaskApp.route('/account')
+@flaskApp.route('/userDashboard')
 @login_required
-def account():
-    return render_template('account.html', title='Account')
+def userDashboard():
+    return render_template('userDashboard.html', title='userDashboard')
 

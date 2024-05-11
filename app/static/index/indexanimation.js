@@ -29,13 +29,13 @@ document.addEventListener('mousemove', function(event){
 
     // Apply the translation to the f1 element
     f1.style.transform = 'translateX(' + translateY + 'px)';
-    f2.style.transform = 'translateX(' + (translateY*1.7) + 'px)';
+    f2.style.transform = 'translateX(' + (translateY*2.7) + 'px)';
     f3.style.transform = 'translateX(' + translateY + 'px)';
-    f4.style.transform = 'translateX(' + (translateY*2.2) + 'px)';
-    f5.style.transform = 'translateX(' + (-translateY*2) + 'px)';
+    f4.style.transform = 'translateX(' + (translateY*2.7) + 'px)';
+    f5.style.transform = 'translateX(' + (-translateY) + 'px)';
     f6.style.transform = 'translateX(' + (-translateY*2.7) + 'px)';
-    f7.style.transform = 'translateX(' + (-translateY*1.7) + 'px)';
-    f8.style.transform = 'translateX(' + (-translateY*2.5) + 'px)';
+    f7.style.transform = 'translateX(' + (-translateY) + 'px)';
+    f8.style.transform = 'translateX(' + (-translateY*2.7) + 'px)';
 })
 
 
