@@ -6,7 +6,6 @@ from .models import Post, User
 
 
 @login_required
-@flaskApp.route('/create', methods=['GET', 'POST'])
 def create_post():
     print('create post')
     create_form = PostForm()
@@ -25,7 +24,6 @@ def create_post():
     
     return redirect('/login')
 
-@flaskApp.route('/display', methods=['GET'])
 def get_all_posts():
     posts = Post.query.all()
     post_data = []
@@ -38,16 +36,14 @@ def get_all_posts():
         post_data.append(data)
     return jsonify(post_data)
 
-
 def get_created_jobs(username):
     user = User.query.filter_by(username=username).first()
     if user:
         user_posts = user.posts
         post_data = []
-
         for post in user_posts:
             data = [post.title, post.content]
-        post_data.append(data)
+            post_data.append(data)
         return jsonify(post_data)
     else:
         flash("User not found")
@@ -61,5 +57,5 @@ def get_applied_jobs(username):
         post_data = []
         for post in applied_posts:
             data = [post.title, post.content]
-        post_data.append(data)
+            post_data.append(data)
     return jsonify(post_data)
