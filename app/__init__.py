@@ -16,5 +16,10 @@ login.login_message_category = 'info'
 db = SQLAlchemy(flaskApp)
 migrate = Migrate(flaskApp, db)
 
-
+# FOR testing and create db
+@flaskApp.cli.command('initdb')
+def initdb_command():
+    """Creates the database tables."""
+    print("created")
+    db.create_all()
 from app import models, routes

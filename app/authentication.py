@@ -8,10 +8,13 @@ from urllib.parse import urlsplit
 
 
 def handle_register():
+    print("handle_register")
     if current_user.is_authenticated:
-        return redirect(url_for('home'))
+        print("authenticated")
+        return redirect(url_for('userDashboard'))
     form = RegisterForm()
     if form.validate_on_submit():
+        print("validating")
         new_user = User(
             username=form.username.data,
             email=form.email.data,
@@ -22,13 +25,13 @@ def handle_register():
 
         flash(f'Account created for {form.username.data}! You can now login', 'success')
         return redirect(url_for('login'))
-
+    print("didnt work")
     return render_template('register.html', title='Register', form=form)
 
 
-def handle_login(field='username'):
+def handle_login(field):
     if current_user.is_authenticated:
-        return redirect(url_for('home'))
+        return redirect(url_for('userDashboard'))
     
     if field == 'email':
         form = LoginForm_Email()
