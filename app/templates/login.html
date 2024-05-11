@@ -87,18 +87,14 @@
                             
                         </form>
                         
-                        <div class="row justify-content-center" >
-                            <div class="col d-flex justify-content-center">
-                                <a href="{{url_for('register')}}">register</a> 
-                            </div>
-                            <div class="col">
-                                <a href="forgotPass.html">forgot password?</a>
-                            </div>
+                        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <div class="d-flex justify-content-center mt-3">
+                            <a href="{{ url_for('register') }}" class="btn btn-link">
+                                <i class="fas fa-user-plus me-2"></i> Register
+                            </a>
+                            <a href="forgotPass.html" class="btn btn-link">
+                                <i class="fas fa-key me-2"></i> Forgot password?
+                            </a>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         
         <script src="../static/parallax.js"></script>
