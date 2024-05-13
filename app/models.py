@@ -53,22 +53,4 @@ class Post(db.Model):
         return f'<Post {self.title}, {self.timestamp}>'
 
     
-class Response:
-    def __init__(self, status: str, message: str):
-        self.status = status
-        self.message = message
-    
-    def to_dictionary(self):
-        return {
-            'status': self.status,
-            'message': self.message,
-        }
-
-class SuccessResponse(Response):
-    def __init__(self, message: str = 'Success'):
-        super().__init__('success', message)
-
-class ErrorResponse(Response):
-    def __init__(self, message: str = 'Error'):
-        super().__init__('error', message)
     

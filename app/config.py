@@ -10,3 +10,10 @@ class Config:
     SECRET_KEY = os.environ.get("FLASK_SECRET_KEY") or '894b899cf457e42d7d868c868e945945'
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'sqlite:///' + os.path.join(basedir, 'app.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+class DeploymentConfig(Config):
+    SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(basedir, 'app.db')
+
+class TestConfig(Config):
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory'
+    TESTING = True

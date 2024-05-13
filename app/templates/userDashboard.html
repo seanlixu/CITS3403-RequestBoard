@@ -8,7 +8,18 @@
     <title>Document</title>
 </head>
 <body >
-
+  <!-- For flashing Accepted job if they have no post -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="flash-messages">
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
     
     <div class="container-fluid">
       <div class="row d-flex">
@@ -22,19 +33,19 @@
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
               <li class="nav-item">
-                <a href="#" class="nav-link active" aria-current="page">
+                <a href="{{ url_for('main.search_jobs')}}" class="nav-link active" aria-current="page">
                   <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
                   Search
                 </a>
               </li>
               <li>
-                <a href="#" class="nav-link text-white">
+                <a href="{{ url_for('main.accepted_jobs') }}" class="nav-link text-white">
                   <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
                   Accepted Jobs
                 </a>
               </li>
               <li>
-                <a href="#" class="nav-link text-white">
+                <a href="{{ url_for('main.uploaded_jobs') }}" class="nav-link text-white">
                   <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
                   Uploaded Jobs
                 </a>
@@ -47,17 +58,31 @@
                 <strong>Username</strong>
               </a>
               <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                <li><a class="dropdown-item" href="{{ url_for('logout') }}">Logout</a></li>
+                <li><a class="dropdown-item" href="{{ url_for('main.logout') }}">Logout</a></li>
 
               </ul>
             </div>
           </div>
         </div>
         <!-- this column will hold the job cards -->
-        <div class="col-10">
-              <!-- here, all the jobs will be displayed -->
-            <div id="jobContent" sclass = "p-0 h-100 "style="border: solid 2px black; height:100vh; width: 100wh"> 
-              testing
+          <div class="col-10">
+            <!-- here, all the jobs will be displayed -->
+              <div id="jobContent" class="p-0 h-100" style="border: solid 2px black; height:100vh; width: 100wh">
+                  {% if posts %}
+                      {% for post in posts %}
+                          <div class="job-card">
+                              <h2>{{ post[0] }}</h2> 
+                              <p>{{ post[1] }}</p> 
+                              <p>Author: {{ post[2].username }}</p>
+                              <p>Assigned: {{ post[3] }}</p>
+                              <p>Assigned User: {{ post[4].username if post[4] else 'Not assigned' }}</p>
+                          </div>
+                      {% endfor %}
+                    {% else %}
+                        <p>No posts available.</p>
+                  {% endif %}
+                </div>
+              </div>
             </div>
         </div>
       </div>
