@@ -13,7 +13,7 @@ def create_post():
     if form.validate_on_submit():
         # If no user, then redirect to login
         if current_user is None:
-            return redirect(url_for('/login'))
+            return redirect(url_for('main.login'))
         # Add new post to Post db using title and content
         new_post = Post(title=form.title, content=form.content, author=current_user)
         db.session.add(new_post)
