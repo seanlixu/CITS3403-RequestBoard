@@ -1,30 +1,50 @@
 from flask import flash, render_template, redirect, url_for
-from flask_login import login_required
-from app import flaskApp
+from flask_login import login_required, current_user
+from app.blueprints import main
 from .authentication import handle_register, handle_login, handle_logout
+from .models import Post
+from .posts import get_all_posts, get_applied_jobs, get_created_jobs
 
-
-@flaskApp.route("/")
-@flaskApp.route("/home")
-@flaskApp.route("/index")
+@main.route("/")
+@main.route("/home")
+@main.route("/index")
 def home():
     return render_template('index.html', title='Home')
 
-@flaskApp.route('/register', methods=['GET', 'POST'])
+@main.route('/register', methods=['GET', 'POST'])
 def register():
     return handle_register()
 
-@flaskApp.route('/login', methods=['GET', 'POST'])
-@flaskApp.route('/login/<string:field>', methods=['GET', 'POST'])
+@main.route('/login', methods=['GET', 'POST'])
+@main.route('/login/<string:field>', methods=['GET', 'POST'])
 def login(field='username'):
     return handle_login(field)
 
-@flaskApp.route('/logout')
+@main.route('/logout')
 def logout():
     return handle_logout()
 
-@flaskApp.route('/userDashboard')
+@main.route('/userDashboard')
 @login_required
 def userDashboard():
-    return render_template('userDashboard.html', title='userDashboard')
+    posts = get_all_posts()
+    return render_template('userDashboard.html', posts=posts)
 
+@main.route('/accepted_jobs')
+@login_required
+def accepted_jobs(field='username'):
+    posts = get_applied_jobs(current_user.username)
+    return render_template('userDashboard.html', posts=posts)
+
+
+@main.route('/uploaded_jobs')
+@login_required
+def uploaded_jobs(field='username'):
+    posts = get_created_jobs(current_user.username)
+    return render_template('userDashboard.html', posts=posts)
+
+@main.route('/search')
+@login_required
+def search_jobs():
+    posts = get_all_posts()
+    return render_template('userDashboard.html', posts=posts)

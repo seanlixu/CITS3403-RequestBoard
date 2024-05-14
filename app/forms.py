@@ -80,3 +80,17 @@ class LoginForm_Email(LoginForm):
         user = User.query.filter_by(email=self.email.data).first()
         if user and not user.check_password(password.data):
             raise ValidationError('Password is incorrect! Please try again')
+title_min, title_max = 6, 30   
+content_min, content_max = 20, 300
+class PostForm():
+    title = StringField("Title", validators=[
+        DataRequired(),
+        Length(min=title_min, max=title_max, message=f'Title must be between {title_min} and {title_max} characters long')
+    ])
+    content = StringField("Content", validators=[
+        DataRequired(),
+        Length(min=content_min, max=content_max, message=f'Content must be between {content_min} and {content_max} characters long')
+    ])
+    submit = SubmitField('Create Post')
+
+    # Add error checkers
