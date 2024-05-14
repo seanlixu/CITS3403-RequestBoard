@@ -19,7 +19,7 @@
                                     <div class="row justify-content-center" style="margin-top:20px;">
                                         <!-- <input class="form-control" type="text" id = "username" name="username" placeholder="Username" required style="margin-top:7px" > -->
                                         {{ form.username.label(class="form-control-label") }}
-                                        <small class="text-muted">Login via <a class="ml-2" href="{{ url_for('login', field='email') }}">email</a></small>
+                                        <small class="text-muted">Login via <a class="ml-2" href="{{ url_for('main.login', field='email') }}">email</a></small>
                 
                                         {% if form.username.errors %}
                                             {{ form.username(class="form-control form-control-lg is-invalid") }}
@@ -36,7 +36,7 @@
                                 {% if form.email %}
                                     <div class="row justify-content-center" style="margin-top:20px;">
                                         {{ form.email.label(class="form-control-label") }}
-                                        <small class="text-muted">Login via <a class="ml-2" href="{{ url_for('login', field='username') }}">username</a></small>
+                                        <small class="text-muted">Login via <a class="ml-2" href="{{ url_for('main.login', field='username') }}">username</a></small>
                                         
                                         {% if form.email.errors %}
                                             {{ form.email(class="form-control form-control-lg is-invalid") }}
@@ -88,7 +88,7 @@
                         </form>
                         
                         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <div class="d-flex justify-content-center mt-3">
-                            <a href="{{ url_for('register') }}" class="btn btn-link">
+                            <a href="{{ url_for('main.register') }}" class="btn btn-link">
                                 <i class="fas fa-user-plus me-2"></i> Register
                             </a>
                             <a href="forgotPass.html" class="btn btn-link">
