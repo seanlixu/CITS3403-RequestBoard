@@ -5,25 +5,25 @@ from .forms import PostForm
 from .models import Post, User
 
 # Login required to make post
-@login_required
-def create_post():
-    pass
-    # Create post form and if valid then add title and content
-    form = PostForm()
-    if form.validate_on_submit():
-        # If no user, then redirect to login
-        if current_user is None:
-            return redirect(url_for('main.login'))
-        # Add new post to Post db using title and content
-        new_post = Post(title=form.title, content=form.content, author=current_user)
-        db.session.add(new_post)
-        db.session.commit()
-        # Flash post was posted
-        flash(f'{form.title}, Was posted successfully!', 'success')
-        # Redirect to post page
-        return redirect('/home')
-    # Else redirect to posts
-    return redirect(url_for('main.userDashboard'), title='Posts', form=form)
+# @login_required
+# def create_post():
+#     pass
+#     # Create post form and if valid then add title and content
+#     form = PostForm()
+#     if form.validate_on_submit():
+#         # If no user, then redirect to login
+#         if current_user is None:
+#             return redirect(url_for('main.login'))
+#         # Add new post to Post db using title and content
+#         new_post = Post(title=form.title, content=form.content, author=current_user)
+#         db.session.add(new_post)
+#         db.session.commit()
+#         # Flash post was posted
+#         flash(f'{form.title}, Was posted successfully!', 'success')
+#         # Redirect to post page
+#         return redirect('/home')
+#     # Else redirect to posts
+#     return redirect(url_for('main.userDashboard'), title='Posts', form=form)
 
 # Get all posts
 def get_all_posts():

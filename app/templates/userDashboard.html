@@ -90,7 +90,9 @@
                               <div>
                                 <div class="row m-t-10" id="job-button">
                                   <!-- aidan, just add ur functions in the onclick. the apply function should add the post to "accepted_jobs" -->
-                                  <button type="button" class="btn btn-primary" id="jobmenu" onclick="">Apply</button>
+                                    <button type="button" class="btn btn-primary" id="jobmenu" onclick="applyJob('{{ post[0] }}', '{{ post[1] }}', '{{ post[2].username }}', '{{ post[3] }}', '{{ post[4].username if post[4]}}')">Apply</button>
+
+
                                 </div>
                                 <div class="row g-10" id="job-button">
                                   <!-- ignore the Read More, its a functionality i may or may not add later on, mostly just a place holder to visually look nice -->
@@ -158,6 +160,42 @@
           fileInput.files = event.dataTransfer.files;
       };
     </script>
+    <script>
+      function applyJob(title, content, author, assigned, assignedUser) {
+        // Ensure assigned and assignedUser are correctly handled as booleans and strings respectively
+        const post = {
+          title: title,
+          content: content,
+          author: author,
+          assigned: assigned === 'True',
+          assignedUser: assignedUser !== 'None' ? assignedUser : null
+        };
+
+        // Send the post object to the server using AJAX
+        fetch('/create_post', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+ // Include CSRF token if needed
+          },
+          body: JSON.stringify(post)
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            alert('Job applied successfully!');
+          } else {
+            alert('An error occurred while applying for the job.');
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+      }
+    </script>
+
+    
+
     
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
