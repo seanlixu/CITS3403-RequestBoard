@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField,  SubmitField, PasswordField, BooleanField
+from wtforms import StringField,  SubmitField, PasswordField, BooleanField, TextAreaField
 from wtforms.validators import DataRequired, Length, Regexp, Email, EqualTo, ValidationError
 
 from app.models import User
@@ -82,12 +82,12 @@ class LoginForm_Email(LoginForm):
             raise ValidationError('Password is incorrect! Please try again')
 title_min, title_max = 6, 30   
 content_min, content_max = 20, 300
-class PostForm():
+class PostForm(FlaskForm):
     title = StringField("Title", validators=[
         DataRequired(),
         Length(min=title_min, max=title_max, message=f'Title must be between {title_min} and {title_max} characters long')
     ])
-    content = StringField("Content", validators=[
+    content = TextAreaField("Content", validators=[
         DataRequired(),
         Length(min=content_min, max=content_max, message=f'Content must be between {content_min} and {content_max} characters long')
     ])

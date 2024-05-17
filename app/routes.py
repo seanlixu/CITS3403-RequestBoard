@@ -1,9 +1,10 @@
-from flask import flash, render_template, redirect, url_for
+from flask import render_template, request
 from flask_login import login_required, current_user
 from app.blueprints import main
 from .authentication import handle_register, handle_login, handle_logout
 from .models import Post
-from .posts import get_all_posts, get_applied_jobs, get_created_jobs
+from .forms import PostForm
+from .posts import get_all_posts, get_applied_jobs, get_created_jobs, create_post, assign
 
 @main.route("/")
 @main.route("/home")
@@ -46,12 +47,14 @@ def uploaded_jobs(field='username'):
     username = current_user.username
     return render_template('userDashboard.html', posts=posts, username=username)
 
-@main.route('/new_job')
+@main.route('/new_job', methods=['GET', 'POST'])
 @login_required
 def new_job():
-    posts = get_all_posts()
+    create_post()
+    form = PostForm()
     username = current_user.username
-    return render_template('userDashboard.html', upload=True, username=username)
+    return render_template('userDashboard.html', form=form, upload=True, username=username)
+
 
 @main.route('/search')
 @login_required
@@ -59,3 +62,8 @@ def search_jobs():
     posts = get_all_posts()
     username = current_user.username
     return render_template('userDashboard.html', posts=posts, username=username)
+
+@main.route('/assign', methods=['GET', 'POST'])
+@login_required
+def assign_job():
+    pass

@@ -1,5 +1,5 @@
 from app import db
-from flask import request, jsonify, redirect, flash, url_for
+from flask import request, redirect, flash, url_for, render_template
 from flask_login import login_required, current_user
 from .forms import PostForm
 from .models import Post, User
@@ -7,23 +7,35 @@ from .models import Post, User
 # Login required to make post
 @login_required
 def create_post():
-    pass
-    # Create post form and if valid then add title and content
+    print('Posting')
+    # Create post f90orm and if valid then add title and content
+    username = current_user.username
     form = PostForm()
-    if form.validate_on_submit():
-        # If no user, then redirect to login
-        if current_user is None:
-            return redirect(url_for('main.login'))
-        # Add new post to Post db using title and content
-        new_post = Post(title=form.title, content=form.content, author=current_user)
-        db.session.add(new_post)
-        db.session.commit()
-        # Flash post was posted
-        flash(f'{form.title}, Was posted successfully!', 'success')
-        # Redirect to post page
-        return redirect('/home')
+    # print(username)
+    # print(form.title.data)
+    # print(form.content.data)
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            # print("Form validated")
+            # Add new post to Post db using title and content
+            new_post = Post(
+                title=form.title.data,
+                content=form.content.data,
+                author=current_user
+            )
+            
+            db.session.add(new_post)
+            db.session.commit()
+            # Flash post was posted
+            flash(f'{form.title.data}, Was posted successfully!', 'success')
+            # Redirect to post page
+            return render_template('userDashboard.html', username=username)
+        else:
+            print(form.errors)
+            flash(f"Form invalid, Please try!", "error")
+            return render_template('userDashboard.html', username=username)
     # Else redirect to posts
-    return redirect(url_for('main.userDashboard'), title='Posts', form=form)
+    return render_template('userDashboard.html', username=username)
 
 # Get all posts
 def get_all_posts():
@@ -39,7 +51,7 @@ def get_all_posts():
     elif posts:
         for post in posts:
             post_data.append((post.title, post.content, post.author, post.assigned, post.assigned_user))
-            print(post)
+            # print(post)
         return post_data
     # return empty array if both fail
     else:
@@ -88,3 +100,17 @@ def get_applied_jobs(username):
     else:
         return []
 
+def assign(post_id):
+    pass
+    username = current_user.username
+    post_id = request.form.get('post_id')
+    print(post_id)
+    print("Assign function 1")
+    if post_id:
+        Post.assigned = True
+        Post.assigned_user_id = current_user.id
+        
+        db.session.commit()
+        flash('Post assigned successfully!', 'success')
+    else:
+        flash('Post not found!', 'error')
