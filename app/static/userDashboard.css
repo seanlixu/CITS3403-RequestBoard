@@ -6,3 +6,31 @@
 .testing:hover{
     background:rgba(12,110,253,255);
 }
+
+#job-card{
+    margin-top:30px;
+
+    border: grey solid 2px;
+    border-radius: 20px;
+}
+
+#job-menu{
+
+
+
+    border: black  2px;
+    border-radius: 20px;
+    font-size:100px;
+}
+
+#job-info{
+
+    border: black  2px;
+    border-radius: 20px;
+}
+
+#job-button{
+    height: 80px;
+    margin-top: 5%;
+    margin-right: 10px;
+}

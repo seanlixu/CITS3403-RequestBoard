@@ -48,3 +48,23 @@ function displayJobs(response){
     section.appendChild(wrapper);
 
 }
+
+document.getElementById("uploaded-jobs").addEventListener("click", function(){
+    var button1 = document.createElement("a");
+    button1.className = "nav-link active";
+
+    var button2 = document.createElement("svg");
+    button2.className = "bi pe-none me-2";
+    button2.setAttribute("width", "16");
+    button2.setAttribute("height", "16");
+
+    var useElement = document.createElement("use");
+    useElement.setAttribute("xlink:href", "#grid");
+    button2.appendChild(useElement);
+
+    var textNode = document.createTextNode("New Posting");
+    button1.appendChild(textNode);
+
+    button1.appendChild(button2);
+    document.getElementById("index").appendChild(button1);
+});
