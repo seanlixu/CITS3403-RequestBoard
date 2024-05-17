@@ -24,14 +24,14 @@
     <div class="container-fluid">
       <div class="row d-flex">
         <!-- this column will hold the nav column -->
-        <div class="col-2" style="padding: 0;">
+        <div class="col-3" style="padding: 0;">
           <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 256px; height: 100vh; position: sticky; top: 0; ">
             <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
               <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
               <span class="fs-4">DashBoard</span>
             </a>
             <hr>
-            <ul class="nav nav-pills flex-column mb-auto">
+            <ul id="index" class="nav nav-pills flex-column mb-auto">
               <li class="nav-item">
                 <a href="{{ url_for('main.search_jobs')}}" class="nav-link active" aria-current="page">
                   <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
@@ -45,17 +45,23 @@
                 </a>
               </li>
               <li>
-                <a href="{{ url_for('main.uploaded_jobs') }}" class="nav-link text-white">
+                <a id="uploaded-jobs" href="{{ url_for('main.uploaded_jobs') }}" class="nav-link text-white">
                   <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
                   Uploaded Jobs
+                </a>
+              </li>
+              <li>
+                <a  href="{{ url_for('main.new_job') }}" class="nav-link text-white">
+                  <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#"></use></svg>
+                  Post New Job
                 </a>
               </li>
             </ul>
             <hr>
             <div class="dropdown">
               <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-                <strong>Username</strong>
+                <img src="{{ url_for('static', filename='handsomeGuy.png') }}" alt="" width="32" height="32" class="rounded-circle me-2">
+                <strong >{{ username }}</strong>
               </a>
               <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
                 <li><a class="dropdown-item" href="{{ url_for('main.logout') }}">Logout</a></li>
@@ -65,28 +71,93 @@
           </div>
         </div>
         <!-- this column will hold the job cards -->
-          <div class="col-10">
-            <!-- here, all the jobs will be displayed -->
-              <div id="jobContent" class="p-0 h-100" style="border: solid 2px black; height:100vh; width: 100wh">
-                  {% if posts %}
-                      {% for post in posts %}
-                          <div class="job-card">
+        <div class="col-8">
+          <!-- here, all the jobs will be displayed -->
+            <div id="jobContent" class="p-0 h-100" style=" height:100vh; width: 100wh">
+                {% if posts %}
+                    {% for post in posts %}
+                      <div id="job-card">
+                        <div class="container">
+                          <div class="row">
+                            <div class="col-6" id="job-info">
                               <h2>{{ post[0] }}</h2> 
                               <p>{{ post[1] }}</p> 
                               <p>Author: {{ post[2].username }}</p>
                               <p>Assigned: {{ post[3] }}</p>
                               <p>Assigned User: {{ post[4].username if post[4] else 'Not assigned' }}</p>
+                            </div>
+                            <div class="col-6 " id="job-menu"> 
+                              <div>
+                                <div class="row m-t-10" id="job-button">
+                                  <!-- aidan, just add ur functions in the onclick. the apply function should add the post to "accepted_jobs" -->
+                                  <button type="button" class="btn btn-primary" id="jobmenu" onclick="">Apply</button>
+                                </div>
+                                <div class="row g-10" id="job-button">
+                                  <!-- ignore the Read More, its a functionality i may or may not add later on, mostly just a place holder to visually look nice -->
+                                  <button type="button" class="btn btn-primary" id="jobmenu2" >Read More</button>
+                                </div>
+                              </div>
+                            </div>
                           </div>
-                      {% endfor %}
+                        </div>
+                      </div>
+                    {% endfor %}
+                  {% else %}
+                    {% if upload %}
                     {% else %}
-                        <p>No posts available.</p>
-                  {% endif %}
+                    <p>No posts available.</p>
+                    {% endif %}
+                {% endif %}
+                {% if upload %}
+                <!-- aidan, you will need to change the attribtuues of these, i have no idea how to integrate this. but i got a form setup -->
+                <div class="container " style="height: 100vh; position: relative">
+                  <div class="row" style="height: 30%; width: 70%; margin: auto; margin-top: 40px;">
+                    <div class="col-12"> 
+                      <form>
+                        <div class="mb-3">
+                          <label for="exampleInputEmail1" class="form-label">Title</label>
+                          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        </div>
+                        <div class="mb-3" >
+                          <label for="exampleInputPassword1" class="form-label">Description</label>
+                          <div class="input-group">
+                            <textarea class="form-control" aria-label="With textarea"></textarea>
+                          </div>
+                        </div>
+                        <div class="mb-3">
+                          <label for="imageUpload" class="form-label">Image</label>
+                          <div id="drop_zone" style="width: 200px; height: 100px; border: 1px solid lightgray; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: lightgray">
+                              Drop image here
+                          </div>
+                          <input type="file" id="imageUpload" style="display: none;">
+                      </div>
+                        <button type="submit" class="btn btn-primary">Upload</button>
+                      </form>
+                    </div>
+                  </div>
+
                 </div>
+                  
+                {% endif %}
               </div>
             </div>
+          </div>
         </div>
       </div>
     </div>
+    <script>
+      var dropZone = document.getElementById('drop_zone');
+      var fileInput = document.getElementById('imageUpload');
+
+      dropZone.ondragover = function(event) {
+          event.preventDefault();
+      };
+
+      dropZone.ondrop = function(event) {
+          event.preventDefault();
+          fileInput.files = event.dataTransfer.files;
+      };
+    </script>
     
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>

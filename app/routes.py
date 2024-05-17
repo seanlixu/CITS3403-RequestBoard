@@ -28,23 +28,34 @@ def logout():
 @login_required
 def userDashboard():
     posts = get_all_posts()
-    return render_template('userDashboard.html', posts=posts)
+    username = current_user.username
+    return render_template('userDashboard.html', posts=posts, username=username)
 
 @main.route('/accepted_jobs')
 @login_required
 def accepted_jobs(field='username'):
     posts = get_applied_jobs(current_user.username)
-    return render_template('userDashboard.html', posts=posts)
+    username = current_user.username
+    return render_template('userDashboard.html', posts=posts, username=username)
 
 
 @main.route('/uploaded_jobs')
 @login_required
 def uploaded_jobs(field='username'):
     posts = get_created_jobs(current_user.username)
-    return render_template('userDashboard.html', posts=posts)
+    username = current_user.username
+    return render_template('userDashboard.html', posts=posts, username=username)
+
+@main.route('/new_job')
+@login_required
+def new_job():
+    posts = get_all_posts()
+    username = current_user.username
+    return render_template('userDashboard.html', upload=True, username=username)
 
 @main.route('/search')
 @login_required
 def search_jobs():
     posts = get_all_posts()
-    return render_template('userDashboard.html', posts=posts)
+    username = current_user.username
+    return render_template('userDashboard.html', posts=posts, username=username)
