@@ -66,4 +66,7 @@ def search_jobs():
 @main.route('/assign', methods=['GET', 'POST'])
 @login_required
 def assign_job():
-    pass
+    post_id = request.form.get('post_id')
+    username = current_user.username
+    posts = get_applied_jobs(current_user.username)
+    return render_template('userDashboard.html', posts=posts, username=username)

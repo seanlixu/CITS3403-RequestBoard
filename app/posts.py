@@ -50,8 +50,8 @@ def get_all_posts():
     # Else if there are posts, append to posts_data
     elif posts:
         for post in posts:
-            post_data.append((post.title, post.content, post.author, post.assigned, post.assigned_user))
-            # print(post)
+            post_data.append((post.title, post.id, post.content, post.author, post.assigned, post.assigned_user))
+            print(post.id)
         return post_data
     # return empty array if both fail
     else:
@@ -74,7 +74,7 @@ def get_created_jobs(username):
         # Else append all post data to post_data and return
         else:
             for post in posts:
-                post_data.append((post.title, post.content, post.author, post.assigned, post.assigned_user))
+                post_data.append((post.title, post.id, post.content, post.author, post.assigned, post.assigned_user))
             return post_data
     else:
         return []
@@ -95,21 +95,18 @@ def get_applied_jobs(username):
         # Else append applied job info and return post data
         else:
             for post in posts:
-                post_data.append((post.title, post.content, post.author, post.assigned, post.assigned_user))
+                post_data.append((post.title, post.id, post.content, post.author, post.assigned, post.assigned_user))
             return post_data
     else:
         return []
 
 def assign(post_id):
-    pass
     username = current_user.username
     post_id = request.form.get('post_id')
-    print(post_id)
-    print("Assign function 1")
-    if post_id:
-        Post.assigned = True
-        Post.assigned_user_id = current_user.id
-        
+    post = Post.query.get(post_id)
+    if post:
+        post.assigned = True
+        post.assigned_user_id = current_user.id
         db.session.commit()
         flash('Post assigned successfully!', 'success')
     else:

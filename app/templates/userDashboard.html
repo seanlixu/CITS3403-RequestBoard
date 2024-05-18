@@ -90,7 +90,9 @@
                               <div>
                                 <div class="row m-t-10" id="job-button">
                                   <!-- aidan, just add ur functions in the onclick. the apply function should add the post to "accepted_jobs" -->
-                                  <button type="button" class="btn btn-primary" id="jobmenu" onclick="">Apply</button>
+                                  <form action="/assign" method="post">
+                                    <button type="submit" class="btn btn-primary" id="jobmenu">Apply</button>
+                                    <input type="hidden" name="post_id" value="{{ post[1] }}"> </form>
                                 </div>
                                 <div class="row g-10" id="job-button">
                                   <!-- ignore the Read More, its a functionality i may or may not add later on, mostly just a place holder to visually look nice -->
