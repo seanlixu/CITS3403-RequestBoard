@@ -68,5 +68,6 @@ def search_jobs():
 def assign_job():
     post_id = request.form.get('post_id')
     username = current_user.username
+    assign(post_id)
     posts = get_applied_jobs(current_user.username)
     return render_template('userDashboard.html', posts=posts, username=username)
