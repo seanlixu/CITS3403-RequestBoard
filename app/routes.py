@@ -1,10 +1,10 @@
-from flask import render_template, request
+from flask import render_template
 from flask_login import login_required, current_user
 from app.blueprints import main
 from .authentication import handle_register, handle_login, handle_logout
-from .models import Post
 from .forms import PostForm
-from .posts import get_all_posts, get_applied_jobs, get_created_jobs, create_post, assign
+from .posts import get_all_posts, get_applied_jobs, get_created_jobs, create_post
+
 
 @main.route("/")
 @main.route("/home")
@@ -12,18 +12,23 @@ from .posts import get_all_posts, get_applied_jobs, get_created_jobs, create_pos
 def home():
     return render_template('index.html', title='Home')
 
+
 @main.route('/register', methods=['GET', 'POST'])
 def register():
     return handle_register()
+
 
 @main.route('/login', methods=['GET', 'POST'])
 @main.route('/login/<string:field>', methods=['GET', 'POST'])
 def login(field='username'):
     return handle_login(field)
 
+
 @main.route('/logout')
+@login_required
 def logout():
     return handle_logout()
+
 
 @main.route('/userDashboard')
 @login_required
@@ -31,6 +36,7 @@ def userDashboard():
     posts = get_all_posts()
     username = current_user.username
     return render_template('userDashboard.html', posts=posts, username=username)
+
 
 @main.route('/accepted_jobs')
 @login_required

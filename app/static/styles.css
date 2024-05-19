@@ -1,10 +1,28 @@
-/* 
-body {
-    max-width: 100%;
-    overflow-x: hidden;
+::-webkit-scrollbar{
+    width: 0.5rem;
+    height: 0.3rem;
+}
+::-webkit-scrollbar-corner{
+    background-color: #00b7ff;
+}
+::-webkit-resizer{
+    background: #0b9ff5;
+}
+::-webkit-scrollbar-track{
+    background: #0044ff;
+}
+::-webkit-scrollbar-thumb{
+    background: #117efa;
+}
+::-webkit-scrollbar-thumb:hover{
+    background: #0b9ff5;
+}
 
-    background:rgb(0, 242, 255);
-} */
+body {
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
 
 .login {
     display: flex;

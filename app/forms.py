@@ -80,6 +80,8 @@ class LoginForm_Email(LoginForm):
         user = User.query.filter_by(email=self.email.data).first()
         if user and not user.check_password(password.data):
             raise ValidationError('Password is incorrect! Please try again')
+        
+        
 title_min, title_max = 6, 30   
 content_min, content_max = 20, 300
 class PostForm(FlaskForm):
