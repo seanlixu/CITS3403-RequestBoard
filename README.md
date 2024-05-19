@@ -64,3 +64,17 @@ Seekers Water is a Flask web application designed to facilitate job sharing with
 1. Register a new account or log in to your existing account.
 1. To post a job, navigate to the "Post New Job" page and fill out the form with the job details.
 1. To accept a job, browse the available jobs on the "Available Jobs" page and click "Apply" on a job you'd like to take on.
+
+## Running tests
+
+1. Navigate to the project directory:
+
+    ```bash
+    cd CITS3403-RequestBoard
+    ```
+
+1. Run the tests:
+
+    ```bash
+    python -m unittest
+    ```

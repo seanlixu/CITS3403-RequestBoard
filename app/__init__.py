@@ -10,7 +10,7 @@ login.login_message_category = 'info'
 
 def create_app(config):
     flaskApp = Flask(__name__)
-    flaskApp.config.from_object(Config)
+    flaskApp.config.from_object(config)
 
     from app.blueprints import main
     flaskApp.register_blueprint(main)
