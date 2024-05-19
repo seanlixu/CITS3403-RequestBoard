@@ -3,7 +3,7 @@ from flask_login import login_required, current_user
 from app.blueprints import main
 from .authentication import handle_register, handle_login, handle_logout
 from .forms import PostForm
-from .posts import get_all_posts, get_applied_jobs, get_created_jobs, create_post, assign
+from .posts import get_all_posts, get_applied_jobs, get_created_jobs, create_post, assign, get_available_jobs
 
 
 @main.route("/")
@@ -65,7 +65,7 @@ def new_job():
 @main.route('/search')
 @login_required
 def search_jobs():
-    posts = get_all_posts()
+    posts = get_available_jobs()
     username = current_user.username
     return render_template('userDashboard.html', posts=posts, username=username)
 
