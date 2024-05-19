@@ -39,7 +39,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ url_for('main.search_jobs')}}" class="nav-link active" aria-current="page">
+                <a href="{{ url_for('main.search_jobs')}}" class="nav-link text-white aria-current="page">
                   <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
                   Available Jobs
                 </a>
@@ -86,14 +86,24 @@
                         <div class="container">
                           <div class="row">
                             <div class="col-6" id="job-info">
+                              
                               <h2>{{ post[0] }}</h2> 
-                              <p>{{ post[2] }}</p> 
-                              <p>Author: {{ post[3].username }}</p>
-                              <p>Assigned: {{ post[4] }}</p>
-                              <p>Assigned User: {{ post[5].username if post[5] else 'Not assigned' }}</p>
+
+                              <div class="opt1">
+                                <p>{{ post[2] }}</p> 
+
+                              </div>
+                              <div class="opt2">
+                                <p>Author: {{ post[3].username }}</p>
+                                <p>Assigned: {{ post[4] }}</p>
+                                <p>Assigned User: {{ post[5].username if post[5] else 'Not assigned' }}</p>
+
+                              </div>
+                              
+                              
                             </div>
                             <div class="col-6 " id="job-menu"> 
-                              <div>
+                              <div>  
                                 <!-- <div class="row m-t-10" id="job-button">
                                   
                                   <form action="/assign" method="post">
@@ -108,7 +118,7 @@
 
                                 <div class="row g-10" id="job-button">
                                   <!-- ignore the Read More, its a functionality i may or may not add later on, mostly just a place holder to visually look nice -->
-                                  <button type="button" class="btn btn-primary" id="jobmenu2" >Read More</button>
+                                  <button type="button" class="btn btn-primary" id="jobmenu2" onclick="toggleVisibility(event)">Read More</button>
                                 </div>
                               </div>
                             </div>
@@ -172,7 +182,25 @@
           event.preventDefault();
           fileInput.files = event.dataTransfer.files;
       };
+
+      function toggleVisibility(event) {
+      // Get the parent job-card element
+      const jobCard = event.target.closest('.job-card');
+
+      // Get the opt1 and opt2 elements within this job card
+      const opt1 = jobCard.querySelector('.opt1');
+      const opt2 = jobCard.querySelector('.opt2');
+
+      if (opt1.style.display === 'none') {
+        opt1.style.display = 'block';
+        opt2.style.display = 'none';
+      } else {
+        opt1.style.display = 'none';
+        opt2.style.display = 'block';
+      }
+    }
     </script>
+    
     
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>

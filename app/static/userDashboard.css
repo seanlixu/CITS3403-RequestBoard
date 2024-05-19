@@ -15,6 +15,16 @@
 }
 
 #job-menu{
+    margin-top: 3px;
+
+
+
+    border: black  2px;
+    border-radius: 20px;
+    font-size:100px;
+}
+#job-menu2{
+    margin-top: 3px;
 
 
 
@@ -34,3 +44,11 @@
     margin-top: 5%;
     margin-right: 10px;
 }
+
+.opt1 {
+    display: none;
+  }
+
+  #job-button {
+    margin: 0;
+  }
