@@ -1,5 +1,5 @@
 from app import db
-from flask import request, redirect, flash, url_for, render_template
+from flask import request, flash, render_template
 from flask_login import login_required, current_user
 from .forms import PostForm
 from .models import Post, User
@@ -8,7 +8,7 @@ from .models import Post, User
 @login_required
 def create_post():
     print('Posting')
-    # Create post f90orm and if valid then add title and content
+    # Create post form and if valid then add title and content
     username = current_user.username
     form = PostForm()
     # print(username)
@@ -27,7 +27,7 @@ def create_post():
             db.session.add(new_post)
             db.session.commit()
             # Flash post was posted
-            flash(f'{form.title.data}, Was posted successfully!', 'success')
+            flash(f'Job {form.title.data} was posted successfully!', 'success')
             # Redirect to post page
             return render_template('userDashboard.html', username=username)
         else:
@@ -37,15 +37,16 @@ def create_post():
     # Else redirect to posts
     return render_template('userDashboard.html', username=username)
 
+
 # Get all posts
 def get_all_posts():
     # Query post db
     posts = Post.query.all()
     post_data = []
-    print('getting all posts')
+    # print('getting all posts')
     # If no posts flash message and return empty array
     if not posts:
-        flash('No available posts!', 'info')
+        flash('No available jobs!', 'info')
         return []
     # Else if there are posts, append to posts_data
     elif posts:
@@ -68,7 +69,7 @@ def get_created_jobs(username):
         post_data = []
         # If no posts flash message
         if not posts:
-            flash(f'User has no uploaded posts!', 'info')
+            flash(f'You have not posted any jobs!', 'info')
             # Change to redirect for correct page
             return []
         # Else append all post data to post_data and return
@@ -90,7 +91,7 @@ def get_applied_jobs(username):
         post_data = []
         # If no posts flash message
         if not posts:
-            flash(f'User has no assigned posts!', 'info')
+            flash(f'You have not accepted any jobs!', 'info')
             return []  
         # Else append applied job info and return post data
         else:
@@ -100,16 +101,14 @@ def get_applied_jobs(username):
     else:
         return []
 
+
 def assign(post_id):
-    pass
     username = current_user.username
     post_id = request.form.get('post_id')
-    print(post_id)
-    print("Assign function 1")
-    if post_id:
-        Post.assigned = True
-        Post.assigned_user_id = current_user.id
-        
+    post = Post.query.get(post_id)
+    if post:
+        post.assigned = True
+        post.assigned_user_id = current_user.id
         db.session.commit()
         flash('Post assigned successfully!', 'success')
     else:

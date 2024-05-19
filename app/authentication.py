@@ -8,13 +8,11 @@ from urllib.parse import urlsplit
 
 
 def handle_register():
-    print("handle_register")
     if current_user.is_authenticated:
-        print("authenticated")
         return redirect(url_for('main.userDashboard'))
+    
     form = RegisterForm()
     if form.validate_on_submit():
-        print("validating")
         new_user = User(
             username=form.username.data,
             email=form.email.data,
@@ -25,7 +23,7 @@ def handle_register():
 
         flash(f'Account created for {form.username.data}! You can now login', 'success')
         return redirect(url_for('main.login'))
-    print("didnt work")
+    
     return render_template('register.html', title='Register', form=form)
 
 
@@ -40,18 +38,20 @@ def handle_login(field):
             
             # extra server side check to see if user exists
             if not user:
-                flash('Email does not exist! Please register or try again', 'danger')
+                # flash('Email does not exist! Please register or try again', 'danger')
                 return redirect(url_for('main.login', field='email'))
             if user and not user.check_password(form.password.data):
-                flash('Password is incorrect! Please try again', 'danger')
+                # flash('Password is incorrect! Please try again', 'danger')
                 return redirect(url_for('main.login', field='email'))
                             
             flash(f'Login successful, welcome {user.username}', 'success')
             login_user(user, remember=form.remember_me.data)
+            
             next_page = request.args.get('next')
             if not next_page or urlsplit(next_page).netloc != '':
-                next_page = url_for('main.home')
+                next_page = url_for('main.userDashboard')
             return redirect(next_page)
+        
         return render_template('login.html', title='Login', form=form)
     
     elif field == 'username':
@@ -61,18 +61,20 @@ def handle_login(field):
             
             # extra server side check to see if user exists
             if not user:
-                flash('Username does not exist! Please register or try again', 'danger')
+                # flash('Username does not exist! Please register or try again', 'danger')
                 return redirect(url_for('main.login', field='username'))
             if user and not user.check_password(form.password.data):
-                flash('Password is incorrect! Please try again', 'danger')
+                # flash('Password is incorrect! Please try again', 'danger')
                 return redirect(url_for('main.login', field='username'))
             
             flash(f'Login successful, welcome {user.username}', 'success')
             login_user(user, remember=form.remember_me.data)
+            
             next_page = request.args.get('next')
             if not next_page or urlsplit(next_page).netloc != '':
                 next_page = url_for('main.userDashboard')
             return redirect(next_page)
+        
         return render_template('login.html', title='Login', form=form)
 
 
