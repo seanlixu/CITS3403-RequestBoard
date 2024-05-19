@@ -37,7 +37,27 @@ def create_post():
     # Else redirect to posts
     return render_template('userDashboard.html', username=username)
 
+def get_available_jobs():
+    posts = Post.query.all()
+    post_data = []
+    # if not post, then if not assigned
+     # for post in post loop then append data then return it 
+    if not posts:
+        flash('No available jobs!', 'info')
+        return []
+    elif posts:
+        for post in posts:
+            if post.assigned != True:
+                post_data.append((post.title, post.id, post.content, post.author, post.assigned, post.assigned_user))
+        return post_data
+    
+    # if fail return nothing
+    else: 
+        return[]
+    
 
+
+    pass
 # Get all posts
 def get_all_posts():
     # Query post db
@@ -114,7 +134,7 @@ def assign(post_id):
         if post.author.username == username:
             flash('You cannot assign the post to yourself as you are the author!', 'danger')
             return
-        
+         
         post.assigned = True
         post.assigned_user_id = current_user.id
         db.session.commit()

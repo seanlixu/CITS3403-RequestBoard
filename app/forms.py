@@ -83,7 +83,7 @@ class LoginForm_Email(LoginForm):
         
         
 title_min, title_max = 6, 30   
-content_min, content_max = 20, 300
+content_min, content_max = 10, 300
 class PostForm(FlaskForm):
     title = StringField("Title", validators=[
         DataRequired(),
