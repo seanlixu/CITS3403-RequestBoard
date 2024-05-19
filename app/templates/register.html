@@ -18,6 +18,7 @@
                             <label for="new-username" style="margin: 0; padding: 0; display: inline;"></label>
                             <div class="row justify-content-center" style="margin-top:20px;">
                                 {{ form.username.label(class="form-control-label") }}
+                                <!-- username -->
                                 {% if form.username.errors %}
                                     {{ form.username(class="form-control form-control-lg is-invalid") }}
                                     <div class="invalid-feedback">
@@ -30,6 +31,7 @@
                                 {% endif %}
                             </div>
 
+                            <!-- email -->
                             <div class="row justify-content-center" style="margin-top:20px;">
                                 {{ form.email.label(class="form-control-label") }}
                     
@@ -45,10 +47,9 @@
                                 {% endif %}
                             </div>
         
-                            
+                            <!-- password -->
                             <label for="new-password" style="margin: 0; padding: 0; display: inline;"></label>
                             <div class="row justify-content-center" style="margin-top:20px;">
-                                <!-- <input type="text" id="new-password" name="password" placeholder="Password" required style="margin-top:7px" class="form-control" aria-describedby="passwordHelpBlock"> -->
                                 {{ form.password.label(class="form-control-label") }}
                 
                                 {% if form.password.errors %}
@@ -64,10 +65,9 @@
                             </div>
 
         
-        
+                            <!-- confirm password -->
                             <label for="new-password" style="margin: 0; padding: 0; display: inline;"></label>
                             <div class="row justify-content-center" style="margin-top:20px;">
-                                <!-- <input type="text" id="new-password" name="new-password" placeholder="Re-enter Password" required style="margin-top:7px" class="form-control" aria-describedby="passwordHelpBlock"> -->
                                 {{ form.confirm_password.label(class="form-control-label") }}
                 
                                 {% if form.confirm_password.errors %}
@@ -84,7 +84,7 @@
 
         
                             <div class="row justify-content-center" style="margin-top:20px;">
-                                <!-- <button type="submit" class="btn btn-primary">register</button> -->
+
                                 {{ form.submit(class="btn btn-outline-info") }}
                             </div>
 
