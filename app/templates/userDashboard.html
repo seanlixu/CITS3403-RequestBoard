@@ -104,20 +104,12 @@
                             </div>
                             <div class="col-6 " id="job-menu"> 
                               <div>  
-                                <!-- <div class="row m-t-10" id="job-button">
-                                  
-                                  <form action="/assign" method="post">
-                                    <button type="submit" class="btn btn-primary" id="jobmenu">Apply</button>
-                                    <input type="hidden" name="post_id" value="{{ post[1] }}"> </form>
-                                </div> -->
-
-                                <!-- aidan, just add ur functions in the onclick. the apply function should add the post to "accepted_jobs" -->
+                              
                                 <form action="/assign" method="post" class="row m-t-10"id="job-button">
                                   <button type="submit" class="btn btn-primary" id="jobmenu">Apply</button>
                                   <input type="hidden" name="post_id" value="{{ post[1] }}"> </form>
 
                                 <div class="row g-10" id="job-button">
-                                  <!-- ignore the Read More, its a functionality i may or may not add later on, mostly just a place holder to visually look nice -->
                                   <button type="button" class="btn btn-primary" id="jobmenu2" onclick="toggleVisibility(event)">Read More</button>
                                 </div>
                               </div>
@@ -133,12 +125,10 @@
                     {% endif %}
                 {% endif %}
                 {% if upload %}
-                <!-- aidan, you will need to change the attribtuues of these, i have no idea how to integrate this. but i got a form setup -->
                 <div class="container " style="height: 100vh; position: relative">
                   <div class="row" style="height: 30%; width: 70%; margin: auto; margin-top: 40px;">
                     <div class="col-12"> 
 
-                      <!-- This post form should be in JINJA!!!! for the errors?!?! -->
 
 
                       <form method="post" action="{{ url_for('main.new_job')}}">
@@ -197,10 +187,9 @@
       };
 
       function toggleVisibility(event) {
-      // Get the parent job-card element
+     
       const jobCard = event.target.closest('.job-card');
 
-      // Get the opt1 and opt2 elements within this job card
       const opt1 = jobCard.querySelector('.opt1');
       const opt2 = jobCard.querySelector('.opt2');
 
