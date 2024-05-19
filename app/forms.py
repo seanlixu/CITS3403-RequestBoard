@@ -85,14 +85,14 @@ class LoginForm_Email(LoginForm):
 title_min, title_max = 6, 30   
 content_min, content_max = 10, 300
 class PostForm(FlaskForm):
-    title = StringField("Title", validators=[
+    title = StringField("Job Title", validators=[
         DataRequired(),
         Length(min=title_min, max=title_max, message=f'Title must be between {title_min} and {title_max} characters long')
     ])
-    content = TextAreaField("Content", validators=[
+    content = TextAreaField("Job Description", validators=[
         DataRequired(),
         Length(min=content_min, max=content_max, message=f'Content must be between {content_min} and {content_max} characters long')
     ])
-    submit = SubmitField('Create Post')
+    submit = SubmitField('Post New Job')
 
     # Add error checkers
