@@ -44,13 +44,17 @@ const $job4 = $('#job4');
 
 $(document).scroll(function() {
     let value= $(this).scrollTop();
-    $pfp1.css('transform', 'translateX(' + (value * -0.5) + 'px) rotate(' + (value * -0.1) + 'deg)');
-    $pfp2.css('transform', 'translateX(' + (value * 0.5) + 'px) rotate(' + (value * 0.1) + 'deg)');
-    $pfp3.css('transform', 'translateX(' + (value * -0.5) + 'px) rotate(' + (value * 0.1) + 'deg)');
-    $pfp4.css('transform', 'translateX(' + (value * 0.5) + 'px) rotate(' + (value * -0.1) + 'deg)');
+    setTimeout(function() {
+        $pfp1.css('transform', 'translateX(' + (value * -0.5) + 'px) rotate(' + (value * -0.1) + 'deg)');
+        $pfp2.css('transform', 'translateX(' + (value * 0.5) + 'px) rotate(' + (value * 0.1) + 'deg)');
+        $pfp3.css('transform', 'translateX(' + (value * -0.5) + 'px) rotate(' + (value * 0.1) + 'deg)');
+        $pfp4.css('transform', 'translateX(' + (value * 0.5) + 'px) rotate(' + (value * -0.1) + 'deg)');
+    }, 100);  // Delay of 500 milliseconds
 
-    $job1.css('transform', 'translateX(' + (value * -0.5) + 'px) rotate(' + (value * -0.1) + 'deg)');
-    $job2.css('transform', 'translateX(' + (value * -0.5) + 'px) rotate(' + (value * 0.1) + 'deg)');
-    $job3.css('transform', 'translateX(' + (value * 0.5) + 'px) rotate(' + (value * 0.1) + 'deg)');
-    $job4.css('transform', 'translateX(' + (value * 0.5) + 'px) rotate(' + (value * -0.1) + 'deg)');
+    setTimeout(function() {
+        $job1.css('transform', 'translateX(' + (value * -0.5) + 'px) rotate(' + (value * -0.1) + 'deg)');
+        $job2.css('transform', 'translateX(' + (value * -0.5) + 'px) rotate(' + (value * 0.1) + 'deg)');
+        $job3.css('transform', 'translateX(' + (value * 0.5) + 'px) rotate(' + (value * 0.1) + 'deg)');
+        $job4.css('transform', 'translateX(' + (value * 0.5) + 'px) rotate(' + (value * -0.1) + 'deg)');
+    }, 200);  // Delay of 1000 milliseconds
 });
