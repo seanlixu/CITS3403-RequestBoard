@@ -39,7 +39,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ url_for('main.search_jobs')}}" class="nav-link active" aria-current="page">
+                <a href="{{ url_for('main.search_jobs')}}" class="nav-link text-white" aria-current="page">
                   <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
                   Available Jobs
                 </a>
@@ -129,27 +129,37 @@
                     <div class="col-12"> 
 
                       <!-- This post form should be in JINJA!!!! for the errors?!?! -->
+
+
                       <form method="post" action="{{ url_for('main.new_job')}}">
                         {{ form.hidden_tag() }}
-                          <div class="mb-3">
-                            
-                            <label for="title" class="form-label">Title</label>
-                            <input type="text" class="form-control" id="title" name="title" aria-describedby="title">
-                          </div>
-                          <div class="mb-3">
-                            <label for="content" class="form-label">Description</label>
-                            <div class="input-group">
-                              <textarea class="form-control" id="content" name="content" aria-label="With textarea"></textarea>
+                        <div class="mb-3">
+                          {{ form.title.label(class="form-label") }}
+                          {% if form.title.errors %}
+                            {{ form.title(class="form-control is-invalid", id="title") }}
+                            <div class="invalid-feedback">
+                              {% for error in form.title.errors %}
+                                <span>{{ error }}</span>
+                              {% endfor %}
                             </div>
-                          </div>
-                          <!-- <div class="mb-3">
-                            <label for="imageUpload" class="form-label">Image</label>
-                            <div id="drop_zone" style="width: 200px; height: 100px; border: 1px solid lightgray; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: lightgray">
-                                Drop image here
+                          {% else %}
+                            {{ form.title(class="form-control", id="title") }}
+                          {% endif %}
+                        </div>
+                        <div class="mb-3">
+                          {{ form.content.label(class="form-label") }}
+                          {% if form.content.errors %}
+                            {{ form.content(class="form-control is-invalid", id="content") }}
+                            <div class="invalid-feedback">
+                              {% for error in form.content.errors %}
+                                <span>{{ error }}</span>
+                              {% endfor %}
                             </div>
-                            <input type="file" id="imageUpload" style="display: none;">
-                        </div> -->
-                          <button type="submit" class="btn btn-primary">Upload</button>
+                          {% else %}
+                            {{ form.content(class="form-control", id="content") }}
+                          {% endif %}
+                        </div>
+                        {{ form.submit(class="btn btn-primary") }}
                       </form>
                     </div>
                   </div>
