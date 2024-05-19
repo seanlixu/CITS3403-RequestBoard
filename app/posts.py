@@ -106,10 +106,12 @@ def assign(post_id):
     username = current_user.username
     post_id = request.form.get('post_id')
     post = Post.query.get(post_id)
-    if post:
+    if post.assigned != True:
         post.assigned = True
         post.assigned_user_id = current_user.id
         db.session.commit()
         flash('Post assigned successfully!', 'success')
+    elif post.assigned == True:
+        flash('Post already assigned!', 'danger')
     else:
         flash('Post not found!', 'error')

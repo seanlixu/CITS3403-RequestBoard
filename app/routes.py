@@ -1,9 +1,9 @@
-from flask import render_template
+from flask import render_template, request
 from flask_login import login_required, current_user
 from app.blueprints import main
 from .authentication import handle_register, handle_login, handle_logout
 from .forms import PostForm
-from .posts import get_all_posts, get_applied_jobs, get_created_jobs, create_post
+from .posts import get_all_posts, get_applied_jobs, get_created_jobs, create_post, assign
 
 
 @main.route("/")
